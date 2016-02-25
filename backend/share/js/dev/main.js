@@ -33,4 +33,43 @@ $(document).ready(function () {
         element.addClass('active');
     }
 
+    if (window.File && window.FileList && window.FileReader) {
+        $('#file-upload').on('change', function (e) {
+            e.preventDefault();
+            var files = e.target.files;
+            var data = new FormData();
+            $.each(files, function (key, value)
+            {
+                data.append('file' + key, value);
+            });
+
+            $.ajax({
+                url: baseUrl + 'images/upload',
+                type: "post",
+                data: data,
+                processData: false,
+                success: function (result) {
+                    if (result.success) {
+
+                    }
+                }
+            });
+            /**
+             * Code hiển thị trên trình duyệt ! plssss
+             */
+//            $.each(files, function (i, file) {
+//                var reader = new FileReader();
+//                reader.onload = function (e) {
+//                    $('<img />', {
+//                        class: 'imageThumb',
+//                        src: e.target.result,
+//                        title: e.target.name
+//                    }).insertAfter('#box-images-preview');
+//                };
+//                reader.readAsDataURL(file);
+//            });
+        });
+    } else {
+        alert("Trình duyệt không hỗ trợ");
+    }
 });
