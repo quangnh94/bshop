@@ -35,8 +35,20 @@ class ItemsForm extends Model {
 
     public function attributeLabels() {
         return [
-            'email' => 'Email',
-            'password' => 'Mật khẩu',
+            'id' => 'ID',
+            'item_name' => 'Tên sản phẩm',
+            'description' => 'Mô tả',
+            'content' => 'Nội dung',
+            'created_at' => 'Created At',
+            'updated_at' => 'Updated At',
+            'alias' => 'Alias',
+            'active' => 'Trạng thái sản phẩm',
+            'category_id' => 'Nhóm sản phẩm',
+            'root_price' => 'Root Price',
+            'sell_price' => 'Sell Price',
+            'quantity' => 'Quantity',
+            'sold_quantity' => 'Sold Quantity',
+            'user_id' => 'User ID',
         ];
     }
 

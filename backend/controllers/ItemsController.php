@@ -2,6 +2,8 @@
 
 namespace backend\controllers;
 
+use backend\models\ItemsForm;
+
 class ItemsController extends BaseController {
 
     public function actionIndex() {
@@ -9,7 +11,10 @@ class ItemsController extends BaseController {
     }
 
     public function actionAdd() {
-        
+        $model = new ItemsForm();
+        return $this->render('add', [
+                    'model' => $model
+        ]);
     }
 
     public function actionUpdate() {
