@@ -44,9 +44,9 @@ class ItemsForm extends Model {
             'alias' => 'Alias',
             'active' => 'Trạng thái sản phẩm',
             'category_id' => 'Nhóm sản phẩm',
-            'root_price' => 'Root Price',
-            'sell_price' => 'Sell Price',
-            'quantity' => 'Quantity',
+            'root_price' => 'Giá gốc',
+            'sell_price' => 'Giá bán',
+            'quantity' => 'Số lượng',
             'sold_quantity' => 'Sold Quantity',
             'user_id' => 'User ID',
         ];

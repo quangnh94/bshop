@@ -36,12 +36,13 @@ class AppAsset extends AssetBundle {
         'js/library/fastclick.min.js',
         'js/library/bootstrap.min.js',
         'js/library/bootstrap3-wysihtml5.all.min.js',
+        'js/library/textutils.js',
         'js/layout/app.min.js',
         'js/layout/demo.js',
         'js/dev/administrator.js',
         'js/dev/main.js',
-        'js/dev/news.js',
         'js/dev/images.js',
+        'js/dev/items.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

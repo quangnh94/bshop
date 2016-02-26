@@ -2,7 +2,8 @@
 
 namespace common\models\database;
 
-use Yii;
+use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "items".
@@ -20,27 +21,31 @@ use Yii;
  * @property double $sell_price
  * @property integer $quantity
  * @property integer $sold_quantity
- * @property integer $user_id
+ * @property string $user_id
  */
-class Items extends \yii\db\ActiveRecord
-{
+class Items extends ActiveRecord {
+
+    public function behaviors() {
+        return [
+            TimestampBehavior::className(),
+        ];
+    }
+
     /**
      * @inheritdoc
      */
-    public static function tableName()
-    {
+    public static function tableName() {
         return 'items';
     }
 
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             [['item_name', 'description', 'content', 'created_at', 'updated_at', 'alias', 'category_id', 'root_price', 'sell_price', 'quantity', 'sold_quantity'], 'required'],
-            [['content'], 'string'],
-            [['created_at', 'updated_at', 'active', 'category_id', 'quantity', 'sold_quantity', 'user_id'], 'integer'],
+            [['content', 'user_id'], 'string'],
+            [['created_at', 'updated_at', 'active', 'category_id', 'quantity', 'sold_quantity'], 'integer'],
             [['root_price', 'sell_price'], 'number'],
             [['item_name', 'description'], 'string', 'max' => 350],
             [['alias'], 'string', 'max' => 500]
@@ -50,23 +55,23 @@ class Items extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
             'id' => 'ID',
-            'item_name' => 'Item Name',
-            'description' => 'Description',
-            'content' => 'Content',
+            'item_name' => 'Tên sản phẩm',
+            'description' => 'Mô tả',
+            'content' => 'Nội dung',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
             'alias' => 'Alias',
-            'active' => 'Active',
-            'category_id' => 'Category ID',
-            'root_price' => 'Root Price',
-            'sell_price' => 'Sell Price',
-            'quantity' => 'Quantity',
+            'active' => 'Trạng thái sản phẩm',
+            'category_id' => 'Nhóm sản phẩm',
+            'root_price' => 'Giá gốc',
+            'sell_price' => 'Giá bán',
+            'quantity' => 'Số lượng',
             'sold_quantity' => 'Sold Quantity',
             'user_id' => 'User ID',
         ];
     }
+
 }

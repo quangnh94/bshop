@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 24, 2016 at 11:02 AM
+-- Generation Time: Feb 26, 2016 at 11:26 AM
 -- Server version: 5.6.26
 -- PHP Version: 5.6.12
 
@@ -59,14 +59,22 @@ CREATE TABLE IF NOT EXISTS `auth_assignment` (
 --
 
 INSERT INTO `auth_assignment` (`item_name`, `user_id`, `created_at`) VALUES
-('administrator_assigndata', 'quang.nh94@gmail.com', 1456202361),
-('administrator_defineauth', 'quang.nh94@gmail.com', 1456202361),
-('administrator_getigroup', 'quang.nh94@gmail.com', 1456202361),
-('administrator_handle', 'quang.nh94@gmail.com', 1456202361),
-('administrator_index', 'quang.nh94@gmail.com', 1456202361),
-('administrator_item', 'quang.nh94@gmail.com', 1456202361),
-('function_index', 'quang.nh94@gmail.com', 1456202361),
-('home_index', 'quang.nh94@gmail.com', 1456202361);
+('administrator_assigndata', 'quang.nh94@gmail.com', 1456481489),
+('administrator_defineauth', 'quang.nh94@gmail.com', 1456481489),
+('administrator_getigroup', 'quang.nh94@gmail.com', 1456481489),
+('administrator_handle', 'quang.nh94@gmail.com', 1456481489),
+('administrator_index', 'quang.nh94@gmail.com', 1456481489),
+('administrator_item', 'quang.nh94@gmail.com', 1456481489),
+('function_index', 'quang.nh94@gmail.com', 1456481489),
+('home_index', 'quang.nh94@gmail.com', 1456481489),
+('images_index', 'quang.nh94@gmail.com', 1456481489),
+('images_test', 'quang.nh94@gmail.com', 1456481489),
+('images_upload', 'quang.nh94@gmail.com', 1456481489),
+('items_add', 'quang.nh94@gmail.com', 1456481489),
+('items_createitem', 'quang.nh94@gmail.com', 1456481489),
+('items_index', 'quang.nh94@gmail.com', 1456481489),
+('items_update', 'quang.nh94@gmail.com', 1456481489),
+('items_upload', 'quang.nh94@gmail.com', 1456481489);
 
 -- --------------------------------------------------------
 
@@ -126,7 +134,17 @@ INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `cr
 ('function', 1, 'Hệ thống cập nhật', NULL, NULL, 1456202346, 1456202346, 1, 'Trùm cấp quyền'),
 ('function_index', 2, 'Hệ thống cập nhật', NULL, NULL, 1456202346, 1456202346, 1, 'Quản lý quyền người dùng'),
 ('home', 1, 'Hệ thống cập nhật', NULL, NULL, 1456202297, 1456202297, 1, 'Trang chính thức hệ thống'),
-('home_index', 2, 'Hệ thống cập nhật', NULL, NULL, 1456202306, 1456202306, 1, 'Trang chủ');
+('home_index', 2, 'Hệ thống cập nhật', NULL, NULL, 1456202306, 1456202306, 1, 'Trang chủ'),
+('images', 1, 'Hệ thống cập nhật', NULL, NULL, 1456374547, 1456374558, 2, 'Quản lý hình ảnh'),
+('images_index', 2, 'Hệ thống cập nhật', NULL, NULL, 1456374547, 1456374559, 2, 'Trùm quản lý hình ảnh'),
+('images_test', 2, 'Hệ thống cập nhật', NULL, NULL, 1456462036, 1456462036, 2, 'TEsst'),
+('images_upload', 2, 'Hệ thống cập nhật', NULL, NULL, 1456395043, 1456395043, 2, 'Tải hình ảnh lên server'),
+('items', 1, 'Hệ thống cập nhật', NULL, NULL, 1456374548, 1456472061, 2, 'Quản lý sản phẩm'),
+('items_add', 2, 'Hệ thống cập nhật', NULL, NULL, 1456374535, 1456472060, 2, 'Thêm sản phẩm'),
+('items_createitem', 2, 'Hệ thống cập nhật', NULL, NULL, 1456472059, 1456472059, 2, 'Tạo sản phẩm '),
+('items_index', 2, 'Hệ thống cập nhật', NULL, NULL, 1456374535, 1456472061, 2, 'Trùm quản lý sản phẩm'),
+('items_update', 2, 'Hệ thống cập nhật', NULL, NULL, 1456374535, 1456374560, 2, 'Sửa sản phẩm'),
+('items_upload', 2, 'Hệ thống cập nhật', NULL, NULL, 1456481483, 1456481483, 2, 'Tải ảnh lên server');
 
 -- --------------------------------------------------------
 
@@ -151,7 +169,15 @@ INSERT INTO `auth_item_child` (`parent`, `child`) VALUES
 ('administrator', 'administrator_index'),
 ('administrator', 'administrator_item'),
 ('function', 'function_index'),
-('home', 'home_index');
+('home', 'home_index'),
+('images', 'images_index'),
+('images', 'images_test'),
+('images', 'images_upload'),
+('items', 'items_add'),
+('items', 'items_createitem'),
+('items', 'items_index'),
+('items', 'items_update'),
+('items', 'items_upload');
 
 -- --------------------------------------------------------
 
@@ -217,8 +243,16 @@ CREATE TABLE IF NOT EXISTS `items` (
   `sell_price` double NOT NULL,
   `quantity` int(11) NOT NULL,
   `sold_quantity` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `user_id` varchar(200) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `items`
+--
+
+INSERT INTO `items` (`id`, `item_name`, `description`, `content`, `created_at`, `updated_at`, `alias`, `active`, `category_id`, `root_price`, `sell_price`, `quantity`, `sold_quantity`, `user_id`) VALUES
+(1, 'Test', 'dgggg', '<p>fsdfsdfsdf</p>', 1456481527, 1456481527, 'test', 1, 1, 100000, 12345678, 50, 0, 'quang.nh94@gmail.com'),
+(2, 'Test', 'dgggg', '<p>fasdfasdfsdfsdfsdf</p>', 1456481608, 1456481608, 'test', 1, 1, 100000, 12345678, 150, 0, 'quang.nh94@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -346,7 +380,7 @@ ALTER TABLE `images`
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `items_properties`
 --
