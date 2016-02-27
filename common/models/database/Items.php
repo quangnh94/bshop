@@ -22,6 +22,7 @@ use yii\db\ActiveRecord;
  * @property integer $quantity
  * @property integer $sold_quantity
  * @property string $user_id
+ * @property string $token
  */
 class Items extends ActiveRecord {
 
@@ -43,8 +44,8 @@ class Items extends ActiveRecord {
      */
     public function rules() {
         return [
-            [['item_name', 'description', 'content', 'created_at', 'updated_at', 'alias', 'category_id', 'root_price', 'sell_price', 'quantity', 'sold_quantity'], 'required'],
-            [['content', 'user_id'], 'string'],
+            [['item_name', 'description', 'created_at', 'updated_at', 'alias', 'category_id', 'root_price', 'sell_price', 'quantity', 'sold_quantity'], 'required'],
+            [['content', 'user_id', 'token'], 'string'],
             [['created_at', 'updated_at', 'active', 'category_id', 'quantity', 'sold_quantity'], 'integer'],
             [['root_price', 'sell_price'], 'number'],
             [['item_name', 'description'], 'string', 'max' => 350],

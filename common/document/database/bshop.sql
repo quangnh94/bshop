@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 26, 2016 at 11:26 AM
+-- Generation Time: Feb 27, 2016 at 05:38 AM
 -- Server version: 5.6.26
 -- PHP Version: 5.6.12
 
@@ -220,8 +220,19 @@ CREATE TABLE IF NOT EXISTS `images` (
   `created_at` int(11) NOT NULL,
   `updated_at` int(11) NOT NULL,
   `object_id` int(11) NOT NULL,
-  `type_object` varchar(250) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `type_object` varchar(250) NOT NULL,
+  `token` varchar(250) NOT NULL,
+  `user_id` varchar(50) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `images`
+--
+
+INSERT INTO `images` (`id`, `images_router`, `created_at`, `updated_at`, `object_id`, `type_object`, `token`, `user_id`) VALUES
+(1, '14565467241414hinh-nen-game-nu-chien-bonh-xinh-dep.jpg', 1456546724, 1456546724, 0, 'items', 'NnZ6SVczbHE5ekZQVlN0djBrZnpCTVhDcXo0Skh3', 'quang.nh94@gmail.com'),
+(2, '145654675112715678_1686815644925120_742065308305425126_n.jpg', 1456546751, 1456546751, 0, 'items', 'dTgwVDFZUjJVVXBzZGJ3N0F1d3Y0NGd6aEM2Tmpu', 'quang.nh94@gmail.com'),
+(3, '145654676012654338_10205064798972503_7126918206354877513_n.jpg', 1456546761, 1456546761, 0, 'items', 'UjlMM1Q1SFMxQUx5RDcwanhEMVE1RFdwODRrSDBv', 'quang.nh94@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -243,16 +254,9 @@ CREATE TABLE IF NOT EXISTS `items` (
   `sell_price` double NOT NULL,
   `quantity` int(11) NOT NULL,
   `sold_quantity` int(11) NOT NULL,
-  `user_id` varchar(200) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `items`
---
-
-INSERT INTO `items` (`id`, `item_name`, `description`, `content`, `created_at`, `updated_at`, `alias`, `active`, `category_id`, `root_price`, `sell_price`, `quantity`, `sold_quantity`, `user_id`) VALUES
-(1, 'Test', 'dgggg', '<p>fsdfsdfsdf</p>', 1456481527, 1456481527, 'test', 1, 1, 100000, 12345678, 50, 0, 'quang.nh94@gmail.com'),
-(2, 'Test', 'dgggg', '<p>fasdfasdfsdfsdfsdf</p>', 1456481608, 1456481608, 'test', 1, 1, 100000, 12345678, 150, 0, 'quang.nh94@gmail.com');
+  `user_id` varchar(200) NOT NULL DEFAULT '0',
+  `token` varchar(250) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -375,12 +379,12 @@ ALTER TABLE `categories_items`
 -- AUTO_INCREMENT for table `images`
 --
 ALTER TABLE `images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `items_properties`
 --

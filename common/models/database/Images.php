@@ -2,7 +2,8 @@
 
 namespace common\models\database;
 
-use Yii;
+use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "images".
@@ -13,35 +14,42 @@ use Yii;
  * @property integer $updated_at
  * @property integer $object_id
  * @property string $type_object
+ * @property string $token
+ * @property string $user_id
  */
-class Images extends \yii\db\ActiveRecord
-{
-    /**
-     * @inheritdoc
-     */
-    public static function tableName()
-    {
-        return 'images';
-    }
+class Images extends ActiveRecord {
 
-    /**
-     * @inheritdoc
-     */
-    public function rules()
-    {
+    const ITEMS_TYPE = 'items';
+
+    public function behaviors() {
         return [
-            [['images_router', 'created_at', 'updated_at', 'object_id', 'type_object'], 'required'],
-            [['created_at', 'updated_at', 'object_id'], 'integer'],
-            [['images_router'], 'string', 'max' => 800],
-            [['type_object'], 'string', 'max' => 250]
+            TimestampBehavior::className(),
         ];
     }
 
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
-    {
+    public static function tableName() {
+        return 'images';
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function rules() {
+        return [
+            [['images_router', 'created_at', 'updated_at', 'object_id', 'type_object'], 'required'],
+            [['created_at', 'updated_at', 'object_id'], 'integer'],
+            [['images_router'], 'string', 'max' => 800],
+            [['type_object', 'token', 'user_id'], 'string', 'max' => 250]
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels() {
         return [
             'id' => 'ID',
             'images_router' => 'Images Router',
@@ -51,4 +59,9 @@ class Images extends \yii\db\ActiveRecord
             'type_object' => 'Type Object',
         ];
     }
+
+    public static function getImage($id) {
+        return self::findOne($id);
+    }
+
 }

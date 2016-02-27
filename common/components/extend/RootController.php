@@ -13,6 +13,7 @@ class RootController extends Controller {
     public $baseUrl;
     public $var;
     public $timeZone;
+    public $pathRoot;
 
     public function init() {
         parent::init();
