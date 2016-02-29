@@ -1,4 +1,5 @@
 var items = {};
+
 items.init = function () {
     $('#form-item').submit(function (e) {
         var imgs = $('.box-body[item-image=check-image]').find('img').length;
@@ -8,6 +9,7 @@ items.init = function () {
         }
     });
     $("#items-content").wysihtml5();
+    
     if (window.File && window.FileList && window.FileReader) {
         $('#file-upload').on('change', function (e) {
             e.preventDefault();

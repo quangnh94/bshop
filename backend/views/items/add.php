@@ -1,6 +1,6 @@
 <?php
 
-use yii\helpers\Url;
+use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 ?>
 <div class="main-access">
@@ -21,7 +21,8 @@ use yii\widgets\ActiveForm;
                 <?= $form->field($model, 'active')->checkbox() ?>
             </div><!-- /.box-body -->
             <div class="box-footer">
-                <button type="submit" id="submit-data" class="btn btn-success"><i class="fa fa-pencil-square-o"></i> Thêm mới</button>
+                <?= Html::submitButton('Thêm mới', ['class' => 'btn btn-success']) ?>
+                <!--<button type="submit" name="submit" id="submit-data" class="btn btn-success"><i class="fa fa-pencil-square-o"></i> Thêm mới</button>-->
                 <button type="reset" class="btn btn-primary"><i class="fa fa-refresh"></i> Làm mới</button>
             </div>
         </div><!-- /.box -->

@@ -64,4 +64,8 @@ class Images extends ActiveRecord {
         return self::findOne($id);
     }
 
+    public static function tokenGet($token) {
+        return self::findAll(['token' => $token]);
+    }
+
 }

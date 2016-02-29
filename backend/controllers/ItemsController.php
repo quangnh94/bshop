@@ -7,29 +7,47 @@ use common\components\utils\TextUtils;
 use common\models\database\Images;
 use common\models\database\Items;
 use Yii;
+use yii\data\ActiveDataProvider;
 
 class ItemsController extends BaseController {
 
-    public function actionIndex() {
-        return $this->render('index');
+    public function init() {
+        parent::init();
     }
 
-    public $token = null;
+    public function actionIndex() {
+        $provider = new ActiveDataProvider([
+            'query' => Items::find(),
+            'pagination' => [
+                'pageSize' => 100,
+            ],
+            'sort' => [
+                'defaultOrder' => [
+                    'created_at' => SORT_DESC
+                ]
+            ],
+        ]);
+        return $this->render('index', [
+                    'provider' => $provider
+        ]);
+    }
 
     public function actionAdd() {
         $model = new Items();
-
+        $model->token = Yii::$app->session->get('secret-key');
         if ($model->load(Yii::$app->request->post())) {
             $model->alias = TextUtils::removeMarks($model->item_name);
             $model->user_id = \Yii::$app->user->getId();
-            $model->token = $this->token;
             $result = $model->save(false);
             if ($result) {
                 \Yii::$app->session->setFlash('success', 'Thêm mới sản phẩm thành công');
+                \Yii::$app->session->remove('secret-key');
                 return $this->refresh();
             } else {
                 \Yii::$app->session->setFlash('error', 'Thêm mới sản phẩm thất bại');
             }
+        } else {
+            Yii::$app->session->set('secret-key', base64_encode(TextUtils::generateRandomString(30)));
         }
         $this->staticClient = 'items.init();';
         return $this->render('add', [
@@ -39,12 +57,11 @@ class ItemsController extends BaseController {
 
     public function actionUpload() {
         if (!empty($_FILES)) {
-            $this->token = base64_encode(TextUtils::generateRandomString(30));
             $fileName = time() . $_FILES['file']['name'];
             $upload = move_uploaded_file($_FILES['file']['tmp_name'], Yii::getAlias('@frontend') . '/web/uploads/' . $fileName);
             if ($upload) {
                 $images = new Images();
-                $images->token = $this->token;
+                $images->token = Yii::$app->session->get('secret-key');
                 $images->type_object = Images::ITEMS_TYPE;
                 $images->user_id = \Yii::$app->user->getId();
                 $images->images_router = $fileName;

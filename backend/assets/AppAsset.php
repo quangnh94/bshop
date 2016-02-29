@@ -41,8 +41,9 @@ class AppAsset extends AssetBundle {
         'js/layout/demo.js',
         'js/dev/administrator.js',
         'js/dev/main.js',
-        'js/dev/images.js',
+        'js/dev/image.js',
         'js/dev/items.js',
+        'js/dev/auth.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',
