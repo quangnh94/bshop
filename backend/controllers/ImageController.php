@@ -51,7 +51,7 @@ class ImageController extends BaseController {
     public function actionUpload() {
         $params = Yii::$app->request->post();
         if (!empty($params)) {
-            
+            print_r($params); die;
         }
     }
 
