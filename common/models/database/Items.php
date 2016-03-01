@@ -75,4 +75,8 @@ class Items extends ActiveRecord {
         ];
     }
 
+    public static function getItem($id) {
+        return self::findOne($id);
+    }
+
 }

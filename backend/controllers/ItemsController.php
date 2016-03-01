@@ -49,16 +49,30 @@ class ItemsController extends BaseController {
         } else {
             Yii::$app->session->set('secret-key', base64_encode(TextUtils::generateRandomString(30)));
         }
-        $this->staticClient = 'items.init();';
+        $this->staticClient = 'items.init(); image.init();';
         return $this->render('add', [
                     'model' => $model
         ]);
     }
 
+    public function actionUpdate($id) {
+        $model = Items::getItem($id);
+
+        $this->staticClient = 'items.init(); image.render(\'' . $model->token . '\');';
+        return $this->render('update', [
+                    'model' => $model
+        ]);
+    }
+
+    /**
+     * AJAX METHOD - not vetifined access - coming soon
+     * @return type
+     */
     public function actionUpload() {
         if (!empty($_FILES)) {
+            $tmp = $_FILES['file']['tmp_name'];
             $fileName = time() . $_FILES['file']['name'];
-            $upload = move_uploaded_file($_FILES['file']['tmp_name'], Yii::getAlias('@frontend') . '/web/uploads/' . $fileName);
+            $upload = move_uploaded_file($tmp, Yii::getAlias('@frontend') . '/web/uploads/' . $fileName);
             if ($upload) {
                 $images = new Images();
                 $images->token = Yii::$app->session->get('secret-key');

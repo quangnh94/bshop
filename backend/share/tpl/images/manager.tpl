@@ -1,18 +1,19 @@
-<% if(typeof data != 'undefined'){ %>
 <div class="box-manager-images">
     <div class="box box-danger" style="border-radius: 0px;">
         <div class="box-header with-border">
             <h3 class="box-title">Upload hình ảnh</h3>
         </div>
         <div class="box-body" item-image="check-image">
-            <label for="file-upload" class="custom-file-upload">
+            <label for="file-upload-img" class="custom-file-upload">
                 <i class="fa fa-cloud-upload"></i> Upload ảnh
             </label>
-            <input id="file-upload" type="file" multiple="true" accept="image/*"/>
+            <input id="file-upload-img" type="file" multiple="true" accept="image/*"/>
+            <div class="help-block" id="image-alert-img" style="display: none"></div>
         </div><!-- /.box-body -->
     </div><!-- /.box -->
 </div>
-<div class="row">
+<% if(typeof data != 'undefined'){ %>
+<div class="row multi-image">
     <% $.each(data, function(key, val){ %>
     <div class="col-sm-6 col-md-4" auth-id='<%= val.id %>' auth-data-token='<%= val.token  %>'>
         <div class="thumbnail">

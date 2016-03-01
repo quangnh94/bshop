@@ -9,7 +9,6 @@ items.init = function () {
         }
     });
     $("#items-content").wysihtml5();
-    
     if (window.File && window.FileList && window.FileReader) {
         $('#file-upload').on('change', function (e) {
             e.preventDefault();
@@ -30,8 +29,16 @@ items.init = function () {
                 data_form.append('file', value);
             });
 
+            var url = null;
+            if ($('#file-upload').attr('type-upload') == 'update') {
+                var token = $('.box-body').attr('token-accept');
+                data_form.append('token', token);
+                url = baseUrl + 'image/upload';
+            } else
+                url = baseUrl + 'items/upload';
+
             $.ajax({
-                url: baseUrl + 'items/upload',
+                url: url,
                 type: "POST",
                 data: data_form,
                 processData: false,

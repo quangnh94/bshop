@@ -1,37 +1,11 @@
 var image = {};
 
 image.init = function () {
-    $('#file-upload').on('change', function (e) {
-        e.preventDefault();
-        var ext = $('#file-upload').val().split('.').pop().toLowerCase();
-        if ($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg']) == -1) {
-            $('#image-alert').text('Vui lòng up file hình ảnh').css('color', '#a94442').show();
-            return false;
-        } else {
-            $('#image-alert').hide();
-        }
-
-        var files = null;
-        var data_form = null;
-
-        files = e.target.files;
-        data_form = new FormData();
-        $.each(files, function (key, value) {
-            data_form.append('file', value);
-        });
-
-        $.ajax({
-            url: baseUrl + 'image/upload',
-            type: "POST",
-            data: {id: 1, key: data_form},
-            processData: false,
-//            contentType: false,
-            success: function (result) {
-                if (result.success) {
-
-                }
-            }
-        });
+    /* Bắt sự kiến hover của ảnh thì tạo nút remove ! */
+    $(document).on('mouseenter', '.imageThumb', function () {
+        alert('xxx');
+    }).on('mouseleave', '.imageThumb', function () {
+        alert('yyy');
     });
 };
 
@@ -51,6 +25,41 @@ image.load = function (id, type) {
                         }
                     }
                 ]);
+
+                $('#file-upload-img').on('change', function (e) {
+                    e.preventDefault();
+                    var ext = $('#file-upload-img').val().split('.').pop().toLowerCase();
+                    if ($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg']) == -1) {
+                        $('#image-alert-img').text('Vui lòng up file hình ảnh').css('color', '#a94442').show();
+                        return false;
+                    } else {
+                        $('#image-alert-img').hide();
+                    }
+
+                    var files = null;
+                    var data_form = null;
+
+                    files = e.target.files;
+                    data_form = new FormData();
+                    $.each(files, function (key, value) {
+                        data_form.append('file', value);
+                    });
+                    data_form.append('token', id);
+
+                    $.ajax({
+                        url: baseUrl + 'image/upload',
+                        type: "POST",
+                        data: data_form,
+                        processData: false,
+                        contentType: false,
+                        success: function (resp) {
+                            if (resp.success) {
+                                var template = tmpl('/images/box-image.tpl', resp);
+                                $('.multi-image:last-child').append(template);
+                            }
+                        }
+                    });
+                });
             }
         }
     });
@@ -70,4 +79,25 @@ image.remove = function (id) {
             }
         });
     }
+};
+
+image.render = function (token) {
+    setTimeout(function () {
+        $.ajax({
+            url: baseUrl + 'image/get',
+            type: "POST",
+            data: {token: token},
+            success: function (resp) {
+                if (resp.success) {
+                    $.each(resp.data, function () {
+                        $('<img />', {
+                            class: 'imageThumb',
+                            src: pathOther + this.images_router,
+                            title: 'Ảnh upload'
+                        }).insertAfter('#box-images-preview');
+                    });
+                }
+            }
+        });
+    }, 300);
 };
