@@ -14,7 +14,7 @@ function drawStatus($data) {
 function displayAction($data) {
     return '<div class="btn-group">'
             . '<a href="' . Url::base('http') . '/items/update?id=' . $data->id . '" class="btn btn-primary"><i class="fa fa-cog"></i> Cập nhật</a>'
-            . '<a href="' . Url::base('http') . '/items/remove?id=' . $data->id . '" class="btn btn-danger"><i class = "fa fa-trash"></i> Xóa</a>'
+            . '<a onclick="items.remove(\'' . $data->id . '\')" class="btn btn-danger"><i class = "fa fa-trash"></i> Xóa</a>'
             . '<a onclick="image.load(\'' . $data->token . '\',\'' . Images::ITEMS_TYPE . '\');" class="btn btn-warning"><i class="fa fa-picture-o"></i> Ảnh</a>'
             . '</div>';
 }

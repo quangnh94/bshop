@@ -98,6 +98,17 @@ class ItemsController extends BaseController {
 
     public function actionRemove() {
         $params = \Yii::$app->request->post();
+        if (!empty($params)) {
+            $item = Items::getItem($params['id']);
+            if (!empty($item)) {
+                $result = $item->delete();
+                if ($result) {
+                    return $this->response(new Response(true, "Xóa dữ liệu thành công", []));
+                } else {
+                    return $this->response(new Response(true, "Xóa dữ liệu không thành công", []));
+                }
+            }
+        }
     }
 
 }

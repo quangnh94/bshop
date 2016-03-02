@@ -32,4 +32,8 @@ class ItemcategoryController extends BaseController {
         ]);
     }
 
+    public function actionAdd() {
+        
+    }
+
 }
