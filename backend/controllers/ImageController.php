@@ -61,7 +61,7 @@ class ImageController extends BaseController {
                 $images->images_router = $fileName;
                 $result = $images->save(false);
                 if ($result) {
-                    return $this->response(new Response(true, "Tải ảnh lên thành công", ['router' => $images->images_router, 'id' => $images->id]));
+                    return $this->response(new Response(true, "Tải ảnh lên thành công", $images));
                 } else
                     return $this->response(new Response(false, "Tải ảnh lên không thành công", []));
             }

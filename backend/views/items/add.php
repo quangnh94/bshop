@@ -12,8 +12,8 @@ use yii\widgets\ActiveForm;
             </div>
             <div class="box-body">
                 <?= $form->field($model, 'item_name')->textInput(['class' => 'form-control', 'placeholder' => 'Tiêu đề tin']) ?>
-                <?= $form->field($model, 'root_price')->textInput(['class' => 'form-control', 'placeholder' => 'Giá gốc']) ?>
-                <?= $form->field($model, 'sell_price')->textInput(['class' => 'form-control', 'placeholder' => 'Giá bán']) ?>
+                <?= $form->field($model, 'root_price')->textInput(['class' => 'form-control ur_price', 'placeholder' => 'Giá gốc']) ?>
+                <?= $form->field($model, 'sell_price')->textInput(['class' => 'form-control ur_price', 'placeholder' => 'Giá bán']) ?>
                 <?= $form->field($model, 'quantity')->textInput(['class' => 'form-control', 'placeholder' => 'Số lượng sản phẩm']) ?>
                 <?= $form->field($model, 'description')->textInput(['class' => 'form-control', 'placeholder' => 'Mô tả chi tiết']) ?>
                 <?= $form->field($model, 'content')->textarea(['style' => 'height:300px;']) ?>

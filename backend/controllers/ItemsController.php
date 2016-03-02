@@ -38,6 +38,8 @@ class ItemsController extends BaseController {
         if ($model->load(Yii::$app->request->post())) {
             $model->alias = TextUtils::removeMarks($model->item_name);
             $model->user_id = \Yii::$app->user->getId();
+            $model->sell_price = str_replace('.', '', $model->sell_price);
+            $model->root_price = str_replace('.', '', $model->root_price);
             $result = $model->save(false);
             if ($result) {
                 \Yii::$app->session->setFlash('success', 'Thêm mới sản phẩm thành công');
@@ -57,7 +59,13 @@ class ItemsController extends BaseController {
 
     public function actionUpdate($id) {
         $model = Items::getItem($id);
-
+        if ($model->load(Yii::$app->request->post())) {
+            $model->updated_at = time();
+            $model->sell_price = str_replace('.', '', $model->sell_price);
+            $model->root_price = str_replace('.', '', $model->root_price);
+            $model->alias = TextUtils::removeMarks($model->item_name);
+            $model->save(false);
+        }
         $this->staticClient = 'items.init(); image.render(\'' . $model->token . '\');';
         return $this->render('update', [
                     'model' => $model

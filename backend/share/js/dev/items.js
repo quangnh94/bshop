@@ -1,16 +1,20 @@
 var items = {};
 
-items.init = function() {
-    $('#form-item').submit(function(e) {
+items.init = function () {
+    $('#form-item').submit(function (e) {
         var imgs = $('.box-body[item-image=check-image]').find('img').length;
         if (imgs <= 0) {
             $('#image-alert').text('Thêm ảnh sản phẩm của bạn').css('color', '#a94442').show();
             return false;
         }
     });
+
+    var sell_price = $('.items-sell_price').val();
+    var root_price = $('.items-root_price').val();
+
     $("#items-content").wysihtml5();
     if (window.File && window.FileList && window.FileReader) {
-        $('#file-upload').on('change', function(e) {
+        $('#file-upload').on('change', function (e) {
             e.preventDefault();
             var ext = $('#file-upload').val().split('.').pop().toLowerCase();
             if ($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg']) == -1) {
@@ -25,7 +29,7 @@ items.init = function() {
 
             files = e.target.files;
             data_form = new FormData();
-            $.each(files, function(key, value) {
+            $.each(files, function (key, value) {
                 data_form.append('file', value);
             });
 
@@ -43,7 +47,7 @@ items.init = function() {
                 data: data_form,
                 processData: false,
                 contentType: false,
-                success: function(result) {
+                success: function (result) {
                     if (result.success) {
                         var html = '<div auth-id="' + result.data.id + '" class="image-each float-left"><span onclick="image.remove(\'' + result.data.id + '\')" class="remove-img"></span><img class="imageThumb" src="' + pathOther + result.data.images_router + '" title="Ảnh upload"/></div>';
                         $('#box-images-preview').append(html);

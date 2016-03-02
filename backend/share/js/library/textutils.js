@@ -196,11 +196,6 @@ textutils.formatNumber = function (number) {
     return x1 + x2;
 };
 
-textutils.imagesThumb = function (image, width) {
-    var date = $('.box-info').attr('date-data');
-    return "https://static8.zamba.vn/thumb_w/" + width + "/muare/phodocu/" + date + '/' + image;
-};
-
 textutils.setCookie = function (name, value, days) {
     var expires;
     if (days) {
@@ -247,19 +242,22 @@ var delay = (function () {
     };
 })();
 
-textutils.suggestData = function (id) {
-    var autocomplete;
-    autocomplete = new google.maps.places.Autocomplete((document.getElementById(id)), {types: ['geocode']});
+var format = function (num) {
+    var str = num.toString().replace("$", ""), parts = false, output = [], i = 1, formatted = null;
 
-    directionsService = new google.maps.DirectionsService();
+    str = str.split("").reverse();
+    for (var j = 0, len = str.length; j < len; j++) {
+        if (str[j] != ".") {
+            output.push(str[j]);
+            if (i % 3 == 0 && j < (len - 1)) {
+                output.push(".");
+            }
+            i++;
+        }
+    }
+    return formatted = output.reverse().join("");
 };
-textutils.getLocation = function () {
-    var address = $('.rd-title').attr('address-location');
-    return address;
-};
-
-textutils.getAuth = function () {
-    var auth = $('.time-thread').attr('auth-profile');
-    return auth;
-};
+$(document).on('keyup', '.ur_price', function () {
+    $(this).val(format($(this).val()));
+});
 
