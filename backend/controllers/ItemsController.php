@@ -81,11 +81,15 @@ class ItemsController extends BaseController {
                 $images->images_router = $fileName;
                 $result = $images->save(false);
                 if ($result) {
-                    return $this->response(new Response(true, "Tải ảnh lên thành công", ['router' => $images->images_router]));
+                    return $this->response(new Response(true, "Tải ảnh lên thành công", $images));
                 } else
                     return $this->response(new Response(false, "Tải ản lên không thành công", []));
             }
         }
+    }
+
+    public function actionRemove() {
+        $params = \Yii::$app->request->post();
     }
 
 }
