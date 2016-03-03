@@ -4,10 +4,8 @@ namespace backend\controllers;
 
 use common\components\output\Response;
 use common\components\utils\TextUtils;
-use common\models\database\Images;
-use common\models\database\Items;
+use common\models\database\CategoriesItems;
 use Yii;
-use yii\data\ActiveDataProvider;
 
 class ItemcategoryController extends BaseController {
 
@@ -16,24 +14,52 @@ class ItemcategoryController extends BaseController {
     }
 
     public function actionIndex() {
-        $provider = new ActiveDataProvider([
-            'query' => Items::find(),
-            'pagination' => [
-                'pageSize' => 100,
-            ],
-            'sort' => [
-                'defaultOrder' => [
-                    'created_at' => SORT_DESC
-                ]
-            ],
-        ]);
-        return $this->render('index', [
-                    'provider' => $provider
+        $category = CategoriesItems::getAll();
+        return $this->render('add', [
+                    'category' => $category
         ]);
     }
 
-    public function actionAdd() {
-        
+    /**
+     * AJAX METHOD - not access check - comming soon
+     */
+    public function actionAddnew() {
+        $params = Yii::$app->request->post();
+        if (!empty($params)) {
+            $category = new CategoriesItems($params);
+            $category->alias = TextUtils::removeMarks($category->category_name);
+            $category->created_at = time();
+            $category->updated_at = time();
+            $resp = $category->save();
+            if ($resp) {
+                return $this->response(new Response(true, "Thêm mới dữ liệu thành công", $category));
+            } else {
+                return $this->response(new Response(false, "Thêm mới dữ liệu thất bại", $category->errors));
+            }
+        }
+    }
+
+    public function actionChangeactive() {
+        $params = Yii::$app->request->post();
+        if (!empty($params)) {
+            $category = CategoriesItems::get($params['id']);
+            $category->active = $category->active == 0 ? 1 : 0;
+            $resp = $category->save(false);
+            if ($resp) {
+                return $this->response(new Response(true, "Thay đổi trạng thái thành công", $category));
+            } else {
+                return $this->response(new Response(false, "Thay đổi trạng thái thất bại", $category->errors));
+            }
+        }
+    }
+    
+    public function actionGetcate() {
+        $category = CategoriesItems::getAll();
+        if (!empty($category)) {
+            return $this->response(new Response(true, "Lấy dữ liệu thành công", $category));
+        } else {
+            return $this->response(new Response(false, "Lấy dữ liệu thất bại", []));
+        }
     }
 
 }

@@ -27,6 +27,7 @@ class AppAsset extends AssetBundle {
         'css/css.css',
     ];
     public $js = [
+        'js/library/jquery-ui.min.js',
         'js/library/morris.min.js',
         'js/library/jquery.slimscroll.min.js',
         'js/library/popup/ejs.js',
@@ -44,6 +45,7 @@ class AppAsset extends AssetBundle {
         'js/dev/image.js',
         'js/dev/items.js',
         'js/dev/auth.js',
+        'js/dev/itemscate.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

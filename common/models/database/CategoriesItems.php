@@ -2,7 +2,8 @@
 
 namespace common\models\database;
 
-use Yii;
+use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "categories_items".
@@ -15,23 +16,27 @@ use Yii;
  * @property integer $updated_at
  * @property integer $active
  */
-class CategoriesItems extends \yii\db\ActiveRecord
-{
+class CategoriesItems extends ActiveRecord {
+
+    public function behaviors() {
+        return [
+            TimestampBehavior::className(),
+        ];
+    }
+
     /**
      * @inheritdoc
      */
-    public static function tableName()
-    {
+    public static function tableName() {
         return 'categories_items';
     }
 
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
-            [['category_name', 'alias', 'parent_id', 'created_at', 'updated_at'], 'required'],
+            [['category_name', 'alias', 'created_at', 'updated_at'], 'required'],
             [['parent_id', 'created_at', 'updated_at', 'active'], 'integer'],
             [['category_name'], 'string', 'max' => 250],
             [['alias'], 'string', 'max' => 500]
@@ -41,8 +46,7 @@ class CategoriesItems extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
             'id' => 'ID',
             'category_name' => 'Category Name',
@@ -53,4 +57,13 @@ class CategoriesItems extends \yii\db\ActiveRecord
             'active' => 'Active',
         ];
     }
+
+    public static function getAll() {
+        return self::find()->orderBy('category_name ASC')->all();
+    }
+
+    public static function get($id) {
+        return self::findOne($id);
+    }
+
 }
