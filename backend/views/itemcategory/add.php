@@ -29,6 +29,42 @@ use yii\widgets\ActiveForm;
                                     </div>
                                     <div class="both"></div>
                                 </div>
+                                <div class="main-lvl-1">
+                                    <?php foreach ($category as $val1) : ?>
+                                        <?php if ($val1->parent_id == $val->id) { ?>
+                                            <div class="alert alert-info alert-beautiful" auth-id='<?= $val1->id ?>'>
+                                                <span class="float-left"><i class="fa fa-chevron-right" style="margin-right: 5px;"></i> <?= $val1->category_name ?></span>
+                                                <div class="float-right">
+                                                    <?php if ($val1->active == 1) { ?>
+                                                        <i class="fa fa-check-circle" auth-check='ck' onclick="itemscate.changeActive('<?= $val1->id ?>')" style="color: greenyellow; cursor: pointer; margin-right: 5px;" title="Đang hoạt động"></i>
+                                                    <?php } else { ?>
+                                                        <i class="fa fa-circle-o" auth-check='ck' onclick="itemscate.changeActive('<?= $val1->id ?>')" style="cursor: pointer; margin-right: 5px;" title="Tạm khóa"></i>
+                                                    <?php } ?>
+                                                    <i class="fa fa-trash" title="Xóa danh mục ! Really ?"></i>
+                                                </div>
+                                                <div class="both"></div>
+                                            </div>
+                                            <div class="main-lvl-2">
+                                                <?php foreach ($category as $val2) : ?>
+                                                <?php if ($val2->parent_id == $val1->id) { ?>
+                                                    <div class="alert alert-warning alert-beautiful" auth-id='<?= $val2->id ?>'>
+                                                        <span class="float-left"><?= $val2->category_name ?></span>
+                                                        <div class="float-right">
+                                                            <?php if ($val2->active == 1) { ?>
+                                                                <i class="fa fa-check-circle" auth-check='ck' onclick="itemscate.changeActive('<?= $val2->id ?>')" style="color: greenyellow; cursor: pointer; margin-right: 5px;" title="Đang hoạt động"></i>
+                                                            <?php } else { ?>
+                                                                <i class="fa fa-circle-o" auth-check='ck' onclick="itemscate.changeActive('<?= $val2->id ?>')" style="cursor: pointer; margin-right: 5px;" title="Tạm khóa"></i>
+                                                            <?php } ?>
+                                                            <i class="fa fa-trash" title="Xóa danh mục ! Really ?"></i>
+                                                        </div>
+                                                        <div class="both"></div>
+                                                    </div>
+                                                <?php } ?>
+                                            <?php endforeach; ?> 
+                                           </div>
+                                        <?php } ?>
+                                    <?php endforeach; ?>
+                                </div>
                             <?php } ?>
                         <?php endforeach; ?>
                     </div>
