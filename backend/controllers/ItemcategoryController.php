@@ -20,6 +20,36 @@ class ItemcategoryController extends BaseController {
         ]);
     }
 
+    public function actionNew() {
+        $model = new CategoriesItems();
+        if ($model->load(Yii::$app->request->post())) {
+            $model->alias = TextUtils::removeMarks($model->category_name);
+            $model->updated_at = time();
+            $model->created_at = time();
+            $resp = $model->save();
+            if ($resp) {
+                Yii::$app->getSession()->setFlash('success', "Thêm mới thành công");
+            } else {
+                Yii::$app->getSession()->setFlash('error', "Thêm mới thất bại");
+            }
+        }
+        return $this->render('new', [
+                    'model' => $model,
+                    'category' => $this->getMenus()
+        ]);
+    }
+
+    public function actionUpdate($id) {
+        $model = CategoriesItems::get($id);
+        if ($model->load(Yii::$app->request->post())) {
+            
+        }
+        return $this->render('update', [
+                    'model' => $model,
+                    'category' => $this->getMenus()
+        ]);
+    }
+
     /**
      * AJAX METHOD - not access check - comming soon
      */
@@ -62,19 +92,12 @@ class ItemcategoryController extends BaseController {
         }
     }
 
-    public function actionNew() {
-        $model = new CategoriesItems();
-        print_r($this->getMenus());
-        die;
-        if ($model->load(Yii::$app->request->post())) {
-            
-        }
-    }
-
     private function getMenus() {
         $menu = CategoriesItems::getAll();
         if (!empty($menu)) {
             return $this->buildTree(0, $menu, []);
+        } else {
+            return [];
         }
     }
 

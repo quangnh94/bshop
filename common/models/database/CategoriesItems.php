@@ -39,7 +39,8 @@ class CategoriesItems extends ActiveRecord {
             [['category_name', 'alias', 'created_at', 'updated_at'], 'required'],
             [['parent_id', 'created_at', 'updated_at', 'active'], 'integer'],
             [['category_name'], 'string', 'max' => 250],
-            [['alias'], 'string', 'max' => 500]
+            [['alias'], 'string', 'max' => 500],
+            [['alias'], 'unique']
         ];
     }
 
