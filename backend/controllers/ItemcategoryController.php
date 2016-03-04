@@ -52,7 +52,7 @@ class ItemcategoryController extends BaseController {
             }
         }
     }
-    
+
     public function actionGetcate() {
         $category = CategoriesItems::getAll();
         if (!empty($category)) {
@@ -60,6 +60,38 @@ class ItemcategoryController extends BaseController {
         } else {
             return $this->response(new Response(false, "Lấy dữ liệu thất bại", []));
         }
+    }
+
+    public function actionNew() {
+        $model = new CategoriesItems();
+        print_r($this->getMenus());
+        die;
+        if ($model->load(Yii::$app->request->post())) {
+            
+        }
+    }
+
+    private function getMenus() {
+        $menu = CategoriesItems::getAll();
+        if (!empty($menu)) {
+            return $this->buildTree(0, $menu, []);
+        }
+    }
+
+    private function buildTree($parentId, $category, $tree, $level = 0) {
+        $level++;
+        foreach ($category as $val) {
+            if ($val->parent_id == $parentId) {
+                $lvl = '';
+                for ($i = 0; $i < $level; $i++) {
+                    $lvl .= '-- ';
+                }
+                $val->category_name = $lvl . $val->category_name;
+                $tree[] = $val;
+                $tree = $this->buildTree($val->id, $category, $tree, $level);
+            }
+        }
+        return $tree;
     }
 
 }
