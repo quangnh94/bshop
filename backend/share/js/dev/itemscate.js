@@ -1,7 +1,34 @@
 var itemscate = {};
 
 itemscate.init = function () {
+    $('input').keyup(function () {
+        var event = $(this);
+        delay(function () {
+            var rep = confirm("Chắc chắn muốn thay đổi đường dẫn của danh mục này ?");
+            if (rep) {
+                var id = $(event).attr('auth-category');
+                var val = $(event).val();
+                if (val == '') {
+                    popup.msg('Đường dẫn không được để trống');
+                    return false;
+                }
+                $.ajax({
+                    url: baseUrl + 'itemcategory/changelink',
+                    type: "POST",
+                    data: {id: id, value: val},
+                    success: function (result) {
+                        if (result.success) {
+                            $(event).parent().parent().css('background', '#dff0d8');
+                            setTimeout(function () {
+                                $(event).parent().parent().css('background', '#fff');
+                            }, 2000);
 
+                        }
+                    }
+                });
+            }
+        }, 1000);
+    });
 };
 
 itemscate.add = function () {
@@ -61,7 +88,16 @@ itemscate.remove = function (id) {
             data: {id: id},
             success: function (result) {
                 if (result.success) {
-
+                    var key = $('tr[data-key=' + id + ']').css('background', '#f2dede');
+                    setTimeout(function () {
+                        key.fadeOut('slow', function () {
+                            if ($('table tbody').find('tr').length == 0) {
+                                $('table tbody').append('<tr><td colspan="6"><div class="empty"><span style="color:red">Không tồn tại dữ liệu tương ứng, vui lòng thử lại</span></div></td></tr>');
+                            }
+                        }).remove();
+                    }, 2000);
+                } else {
+                    popup.msg(result.message);
                 }
             }
         });
@@ -84,24 +120,3 @@ itemscate.changeActive = function (id) {
         }
     });
 };
-
-$(function () {
-    var $parent = $(".main-lvl-parent"),
-            $level1 = $(".main-lvl-1"),
-            $level2 = $(".main-lvl-2");
-
-
-    $(".alert", $level1).draggable({
-        containment: "document",
-        helper: "clone",
-        cursor: "move"
-    });
-
-    $parent.droppable({
-        accept: ".main-lvl-1 > .alert",
-        drop: function (event, ui) {
-            var $drag = ui.draggable;
-            $($parent).append($drag[0].outerHTML);
-        }
-    });
-});

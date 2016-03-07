@@ -67,4 +67,13 @@ class CategoriesItems extends ActiveRecord {
         return self::findOne($id);
     }
 
+    public static function existsChild($id) {
+        $child = self::findOne(['parent_id' => $id]);
+        if (!empty($child)) {
+            return false;
+        } else {
+            return self::get($id);
+        }
+    }
+
 }

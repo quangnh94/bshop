@@ -18,7 +18,6 @@ use yii\widgets\ActiveForm;
             </div><!-- /.box-body -->
             <div class="box-footer">
                 <?= Html::submitButton('Thêm mới', ['class' => 'btn btn-success']) ?>
-                <!--<button type="submit" name="submit" id="submit-data" class="btn btn-success"><i class="fa fa-pencil-square-o"></i> Thêm mới</button>-->
                 <button type="reset" class="btn btn-primary"><i class="fa fa-refresh"></i> Làm mới</button>
             </div>
         </div><!-- /.box -->

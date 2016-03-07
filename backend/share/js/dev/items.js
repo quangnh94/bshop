@@ -78,7 +78,6 @@ items.remove = function (id) {
                     var key = $('tr[data-key=' + id + ']').css('background', '#f2dede');
                     setTimeout(function () {
                         key.fadeOut('slow', function () {
-                            console.log($('table tbody').find('tr').length);
                             if ($('table tbody').find('tr').length == 0) {
                                 $('table tbody').append('<tr><td colspan="6"><div class="empty"><span style="color:red">Không tồn tại dữ liệu tương ứng, vui lòng thử lại</span></div></td></tr>');
                             }

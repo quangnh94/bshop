@@ -14,9 +14,9 @@ class ItemcategoryController extends BaseController {
     }
 
     public function actionIndex() {
-        $category = CategoriesItems::getAll();
-        return $this->render('add', [
-                    'category' => $category
+        $this->staticClient = "itemscate.init();";
+        return $this->render('index', [
+                    'category' => $this->getMenus()
         ]);
     }
 
@@ -42,7 +42,13 @@ class ItemcategoryController extends BaseController {
     public function actionUpdate($id) {
         $model = CategoriesItems::get($id);
         if ($model->load(Yii::$app->request->post())) {
-            
+            $model->updated_at = time();
+            $resp = $model->save(false);
+            if ($resp) {
+                Yii::$app->session->setFlash('success', "Sửa thành công");
+            } else {
+                Yii::$app->session->setFlash('failed', "Sửa thất bại");
+            }
         }
         return $this->render('update', [
                     'model' => $model,
@@ -53,6 +59,10 @@ class ItemcategoryController extends BaseController {
     /**
      * AJAX METHOD - not access check - comming soon
      */
+    private function beforeCheck($models) {
+        
+    }
+
     public function actionAddnew() {
         $params = Yii::$app->request->post();
         if (!empty($params)) {
@@ -89,6 +99,37 @@ class ItemcategoryController extends BaseController {
             return $this->response(new Response(true, "Lấy dữ liệu thành công", $category));
         } else {
             return $this->response(new Response(false, "Lấy dữ liệu thất bại", []));
+        }
+    }
+
+    public function actionChangelink() {
+        $params = Yii::$app->request->post();
+        if (!empty($params)) {
+            $category = CategoriesItems::get($params['id']);
+            $category->alias = TextUtils::removeMarks($params['value']);
+            $resp = $category->save(false);
+            if ($resp) {
+                return $this->response(new Response(true, "Thay đổi trạng thái thành công", $category));
+            } else {
+                return $this->response(new Response(false, "Thay đổi trạng thái thất bại", $category->errors));
+            }
+        }
+    }
+
+    public function actionRemove() {
+        $params = Yii::$app->request->post();
+        if (!empty($params)) {
+            $del = CategoriesItems::existsChild($params['id']);
+            if ($del == false) {
+                return $this->response(new Response(false, "Vui lòng xóa hoặc di chuyển danh mục con", []));
+            } else {
+                $resp = $del->delete();
+                if ($resp) {
+                    return $this->response(new Response(true, "Xóa thành công", []));
+                } else {
+                    return $this->response(new Response(false, "Xóa không thành công", $category->errors));
+                }
+            }
         }
     }
 
