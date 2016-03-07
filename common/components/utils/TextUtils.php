@@ -494,4 +494,12 @@ class TextUtils {
         return $randomString;
     }
 
+    public static function createCategory($category) {
+        $newCate = ['0' => 'Danh mục cha'];
+        foreach ($category as $key => $val) {
+            $newCate[$key] = $val;
+        }
+        return $newCate;
+    }
+
 }

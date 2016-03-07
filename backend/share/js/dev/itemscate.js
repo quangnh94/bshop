@@ -1,34 +1,45 @@
 var itemscate = {};
 
-itemscate.init = function () {
-    $('input').keyup(function () {
-        var event = $(this);
-        delay(function () {
-            var rep = confirm("Chắc chắn muốn thay đổi đường dẫn của danh mục này ?");
-            if (rep) {
-                var id = $(event).attr('auth-category');
-                var val = $(event).val();
-                if (val == '') {
-                    popup.msg('Đường dẫn không được để trống');
-                    return false;
-                }
-                $.ajax({
-                    url: baseUrl + 'itemcategory/changelink',
-                    type: "POST",
-                    data: {id: id, value: val},
-                    success: function (result) {
-                        if (result.success) {
-                            $(event).parent().parent().css('background', '#dff0d8');
-                            setTimeout(function () {
-                                $(event).parent().parent().css('background', '#fff');
-                            }, 2000);
+itemscate.init = function (id) {
+    if (typeof id != 'undefined') {
+        console.log(typeof id);
+        setTimeout(function () {
+            $.each($('option'), function () {
+                if ($(this).val() == id)
+                    $(this).remove();
+            });
 
-                        }
+        }, 50);
+    } else {
+        $('input').keyup(function () {
+            var event = $(this);
+            delay(function () {
+                var rep = confirm("Chắc chắn muốn thay đổi đường dẫn của danh mục này ?");
+                if (rep) {
+                    var id = $(event).attr('auth-category');
+                    var val = $(event).val();
+                    if (val == '') {
+                        popup.msg('Đường dẫn không được để trống');
+                        return false;
                     }
-                });
-            }
-        }, 1000);
-    });
+                    $.ajax({
+                        url: baseUrl + 'itemcategory/changelink',
+                        type: "POST",
+                        data: {id: id, value: val},
+                        success: function (result) {
+                            if (result.success) {
+                                $(event).parent().parent().css('background', '#dff0d8');
+                                setTimeout(function () {
+                                    $(event).parent().parent().css('background', '#fff');
+                                }, 2000);
+
+                            }
+                        }
+                    });
+                }
+            }, 1000);
+        });
+    }
 };
 
 itemscate.add = function () {

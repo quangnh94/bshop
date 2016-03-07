@@ -1,5 +1,6 @@
 <?php
 
+use common\components\utils\TextUtils;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
@@ -13,7 +14,7 @@ use yii\widgets\ActiveForm;
             </div>
             <div class="box-body">
                 <?= $form->field($model, 'category_name')->textInput(['class' => 'form-control', 'placeholder' => 'Tiêu đề tin']) ?>
-                <?= $form->field($model, 'parent_id')->dropDownList(array_merge(["0" => "Là menu cha"], ArrayHelper::map($category, 'id', 'category_name'))) ?>
+                <?= $form->field($model, 'parent_id')->dropDownList(TextUtils::createCategory(ArrayHelper::map($category, 'id', 'category_name'))) ?>
                 <?= $form->field($model, 'active')->checkbox() ?>
             </div><!-- /.box-body -->
             <div class="box-footer">

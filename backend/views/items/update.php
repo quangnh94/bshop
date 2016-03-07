@@ -1,5 +1,6 @@
 <?php
 
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 ?>
@@ -17,7 +18,7 @@ use yii\widgets\ActiveForm;
                 <?= $form->field($model, 'quantity')->textInput(['class' => 'form-control', 'placeholder' => 'Số lượng sản phẩm']) ?>
                 <?= $form->field($model, 'description')->textInput(['class' => 'form-control', 'placeholder' => 'Mô tả chi tiết']) ?>
                 <?= $form->field($model, 'content')->textarea(['style' => 'height:300px;']) ?>
-                <?= $form->field($model, 'category_id')->dropDownList(['a', 'b', 'c']) ?>
+                <?= $form->field($model, 'category_id')->dropDownList(ArrayHelper::map($category, 'id', 'category_name')) ?>
                 <?= $form->field($model, 'active')->checkbox() ?>
             </div><!-- /.box-body -->
             <div class="box-footer">

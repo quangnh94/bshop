@@ -28,7 +28,7 @@ class ItemsController extends BaseController {
             ],
         ]);
         return $this->render('index', [
-                    'provider' => $provider
+                    'provider' => $provider,
         ]);
     }
 
@@ -53,7 +53,8 @@ class ItemsController extends BaseController {
         }
         $this->staticClient = 'items.init(); image.init();';
         return $this->render('add', [
-                    'model' => $model
+                    'model' => $model,
+                    'category' => $this->getMenus()
         ]);
     }
 
@@ -68,7 +69,8 @@ class ItemsController extends BaseController {
         }
         $this->staticClient = 'items.init(); image.render(\'' . $model->token . '\');';
         return $this->render('update', [
-                    'model' => $model
+                    'model' => $model,
+                    'category' => $this->getMenus()
         ]);
     }
 
