@@ -6,6 +6,7 @@ use common\components\output\Response;
 use common\components\utils\TextUtils;
 use common\models\database\Images;
 use common\models\database\Items;
+use common\models\database\ItemsProperties;
 use Yii;
 use yii\data\ActiveDataProvider;
 
@@ -107,8 +108,72 @@ class ItemsController extends BaseController {
                 if ($result) {
                     return $this->response(new Response(true, "Xóa dữ liệu thành công", []));
                 } else {
-                    return $this->response(new Response(true, "Xóa dữ liệu không thành công", []));
+                    return $this->response(new Response(false, "Xóa dữ liệu không thành công", []));
                 }
+            }
+        }
+    }
+
+    /* Thêm thuộc tính sản phẩm */
+
+    public function actionAddprop() {
+        $params = \Yii::$app->request->post();
+        if (!empty($params)) {
+            $prop = null;
+            if (isset($params['id']) && !empty($params['id'])) {
+                $prop = ItemsProperties::get($params['id']);
+                $prop->property_name = $params['property_name'];
+            } else {
+                $prop = new ItemsProperties($params);
+                $prop->created_at = time();
+                $prop->parent_id = 0;
+            }
+            $prop->updated_at = time();
+            $result = $prop->save(false);
+            if ($result) {
+                return $this->response(new Response(true, "Thêm mới thuộc tính sản phẩm thành công", $prop));
+            } else {
+                return $this->response(new Response(false, "Thất bại", []));
+            }
+        }
+    }
+
+    /* Show thuộc tính */
+
+    public function actionGenprop() {
+        $params = \Yii::$app->request->post();
+        if (!empty($params)) {
+            $prop = ItemsProperties::getAllById($params['id']);
+            if (!empty($prop)) {
+                return $this->response(new Response(true, "Lấy dữ liệu thuộc tính thành công", $prop));
+            } else {
+                return $this->response(new Response(false, "Thất bại", []));
+            }
+        }
+    }
+
+    /* Xóa thuộc tính cha */
+
+    public function actionPremove() {
+        $params = \Yii::$app->request->post();
+        if (!empty($params)) {
+            $remove = ItemsProperties::removeP($params['id']);
+            if ($remove == false) {
+                return $this->response(new Response(false, "Vui lòng xóa toàn bộ giá trị trước khi thực hiện xóa thuộc tính cha", []));
+            } else {
+                return $this->response(new Response(true, "Xóa thành công", []));
+            }
+        }
+    }
+
+    public function actionGetp() {
+        $params = \Yii::$app->request->post();
+        if (!empty($params)) {
+            $result = ItemsProperties::get($params['id']);
+            if ($result) {
+                return $this->response(new Response(true, "Lấy dữ liệu thành công", $result));
+            } else {
+                return $this->response(new Response(false, "Xóa thành công", []));
             }
         }
     }

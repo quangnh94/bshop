@@ -16,6 +16,7 @@ function displayAction($data) {
             . '<a href="' . Url::base('http') . '/items/update?id=' . $data->id . '" class="btn btn-primary"><i class="fa fa-cog"></i> Cập nhật</a>'
             . '<a onclick="items.remove(\'' . $data->id . '\')" class="btn btn-danger"><i class = "fa fa-trash"></i> Xóa</a>'
             . '<a onclick="image.load(\'' . $data->token . '\',\'' . Images::ITEMS_TYPE . '\');" class="btn btn-warning"><i class="fa fa-picture-o"></i> Ảnh</a>'
+            . '<a onclick="property.show(\'' . $data->id . '\');" class="btn btn-success"><i class="fa fa-cubes"></i> Thuộc tính</a>'
             . '</div>';
 }
 ?>
@@ -57,17 +58,6 @@ function displayAction($data) {
                                 'contentOptions' => ['class' => 'vertical-middle'],
                                 'value' => function ($data) {
                             return $data->sell_price;
-                        },
-                            ],
-                            [
-                                'class' => 'yii\grid\DataColumn',
-                                'attribute' => 'quantity',
-                                'header' => 'Số lượng sản phẩm',
-                                'headerOptions' => ['class' => 'text-center'],
-                                'format' => 'html',
-                                'contentOptions' => ['class' => 'vertical-middle'],
-                                'value' => function ($data) {
-                            return $data->quantity;
                         },
                             ],
                             [

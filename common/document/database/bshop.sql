@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 27, 2016 at 05:38 AM
+-- Generation Time: Mar 08, 2016 at 11:20 AM
 -- Server version: 5.6.26
 -- PHP Version: 5.6.12
 
@@ -59,22 +59,31 @@ CREATE TABLE IF NOT EXISTS `auth_assignment` (
 --
 
 INSERT INTO `auth_assignment` (`item_name`, `user_id`, `created_at`) VALUES
-('administrator_assigndata', 'quang.nh94@gmail.com', 1456481489),
-('administrator_defineauth', 'quang.nh94@gmail.com', 1456481489),
-('administrator_getigroup', 'quang.nh94@gmail.com', 1456481489),
-('administrator_handle', 'quang.nh94@gmail.com', 1456481489),
-('administrator_index', 'quang.nh94@gmail.com', 1456481489),
-('administrator_item', 'quang.nh94@gmail.com', 1456481489),
-('function_index', 'quang.nh94@gmail.com', 1456481489),
-('home_index', 'quang.nh94@gmail.com', 1456481489),
-('images_index', 'quang.nh94@gmail.com', 1456481489),
-('images_test', 'quang.nh94@gmail.com', 1456481489),
-('images_upload', 'quang.nh94@gmail.com', 1456481489),
-('items_add', 'quang.nh94@gmail.com', 1456481489),
-('items_createitem', 'quang.nh94@gmail.com', 1456481489),
-('items_index', 'quang.nh94@gmail.com', 1456481489),
-('items_update', 'quang.nh94@gmail.com', 1456481489),
-('items_upload', 'quang.nh94@gmail.com', 1456481489);
+('administrator_assigndata', 'quang.nh94@gmail.com', 1457405287),
+('administrator_defineauth', 'quang.nh94@gmail.com', 1457405287),
+('administrator_getigroup', 'quang.nh94@gmail.com', 1457405287),
+('administrator_handle', 'quang.nh94@gmail.com', 1457405287),
+('administrator_index', 'quang.nh94@gmail.com', 1457405287),
+('administrator_item', 'quang.nh94@gmail.com', 1457405287),
+('function_index', 'quang.nh94@gmail.com', 1457405287),
+('home_index', 'quang.nh94@gmail.com', 1457405287),
+('image_get', 'quang.nh94@gmail.com', 1457405287),
+('image_index', 'quang.nh94@gmail.com', 1457405287),
+('image_remove', 'quang.nh94@gmail.com', 1457405287),
+('image_upload', 'quang.nh94@gmail.com', 1457405287),
+('itemcategory_addnew', 'quang.nh94@gmail.com', 1457405287),
+('itemcategory_changeactive', 'quang.nh94@gmail.com', 1457405287),
+('itemcategory_changelink', 'quang.nh94@gmail.com', 1457405287),
+('itemcategory_getcate', 'quang.nh94@gmail.com', 1457405287),
+('itemcategory_index', 'quang.nh94@gmail.com', 1457405287),
+('itemcategory_new', 'quang.nh94@gmail.com', 1457405287),
+('itemcategory_remove', 'quang.nh94@gmail.com', 1457405287),
+('itemcategory_update', 'quang.nh94@gmail.com', 1457405287),
+('items_add', 'quang.nh94@gmail.com', 1457405287),
+('items_index', 'quang.nh94@gmail.com', 1457405287),
+('items_remove', 'quang.nh94@gmail.com', 1457405287),
+('items_update', 'quang.nh94@gmail.com', 1457405287),
+('items_upload', 'quang.nh94@gmail.com', 1457405287);
 
 -- --------------------------------------------------------
 
@@ -90,7 +99,7 @@ CREATE TABLE IF NOT EXISTS `auth_group` (
   `status` tinyint(4) NOT NULL DEFAULT '0',
   `description` varchar(250) NOT NULL,
   `alias` varchar(250) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `auth_group`
@@ -98,8 +107,9 @@ CREATE TABLE IF NOT EXISTS `auth_group` (
 
 INSERT INTO `auth_group` (`id`, `group_name`, `created_at`, `updated_at`, `status`, `description`, `alias`) VALUES
 (1, 'Hệ thống', 1456200930, 1456200930, 1, 'Quản lý hệ thống quản trị', ''),
-(2, 'Sản phẩm và tin tức', 1456200966, 1456200966, 1, 'Nhóm quyền quản lý sản phẩm và tin tức', ''),
-(3, 'Khách hàng', 1456201000, 1456201000, 1, 'Nhóm quyền quản lý khách hàng', '');
+(2, 'Sản phẩm', 1456200966, 1457404598, 1, 'Nhóm quyền quản lý sản phẩm', ''),
+(3, 'Khách hàng', 1456201000, 1456201000, 1, 'Nhóm quyền quản lý khách hàng', ''),
+(4, 'Hình ảnh ', 1457405034, 1457405034, 1, 'Quản trị hình ảnh', '');
 
 -- --------------------------------------------------------
 
@@ -124,27 +134,37 @@ CREATE TABLE IF NOT EXISTS `auth_item` (
 --
 
 INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`, `group_id`, `alias`) VALUES
-('administrator', 1, 'Hệ thống cập nhật', NULL, NULL, 1456202205, 1456202205, 1, 'Trùm phán quyết'),
-('administrator_assigndata', 2, 'Hệ thống cập nhật', NULL, NULL, 1456202272, 1456202272, 1, 'Cấp quyền người dùng'),
-('administrator_defineauth', 2, 'Hệ thống cập nhật', NULL, NULL, 1456202230, 1456202230, 1, 'Định nghĩa quyền'),
-('administrator_getigroup', 2, 'Hệ thống cập nhật', NULL, NULL, 1456202261, 1456202261, 1, 'Lấy nhóm quyền'),
-('administrator_handle', 2, 'Hệ thống cập nhật', NULL, NULL, 1456202206, 1456202206, 1, 'Xử lý nhóm quyền'),
-('administrator_index', 2, 'Hệ thống cập nhật', NULL, NULL, 1456202207, 1456202207, 1, 'Quản lý quyền định nghĩa'),
-('administrator_item', 2, 'Hệ thống cập nhật', NULL, NULL, 1456202247, 1456202247, 1, 'Lấy quyền định nghĩa'),
-('function', 1, 'Hệ thống cập nhật', NULL, NULL, 1456202346, 1456202346, 1, 'Trùm cấp quyền'),
-('function_index', 2, 'Hệ thống cập nhật', NULL, NULL, 1456202346, 1456202346, 1, 'Quản lý quyền người dùng'),
-('home', 1, 'Hệ thống cập nhật', NULL, NULL, 1456202297, 1456202297, 1, 'Trang chính thức hệ thống'),
-('home_index', 2, 'Hệ thống cập nhật', NULL, NULL, 1456202306, 1456202306, 1, 'Trang chủ'),
-('images', 1, 'Hệ thống cập nhật', NULL, NULL, 1456374547, 1456374558, 2, 'Quản lý hình ảnh'),
-('images_index', 2, 'Hệ thống cập nhật', NULL, NULL, 1456374547, 1456374559, 2, 'Trùm quản lý hình ảnh'),
-('images_test', 2, 'Hệ thống cập nhật', NULL, NULL, 1456462036, 1456462036, 2, 'TEsst'),
-('images_upload', 2, 'Hệ thống cập nhật', NULL, NULL, 1456395043, 1456395043, 2, 'Tải hình ảnh lên server'),
-('items', 1, 'Hệ thống cập nhật', NULL, NULL, 1456374548, 1456472061, 2, 'Quản lý sản phẩm'),
-('items_add', 2, 'Hệ thống cập nhật', NULL, NULL, 1456374535, 1456472060, 2, 'Thêm sản phẩm'),
-('items_createitem', 2, 'Hệ thống cập nhật', NULL, NULL, 1456472059, 1456472059, 2, 'Tạo sản phẩm '),
-('items_index', 2, 'Hệ thống cập nhật', NULL, NULL, 1456374535, 1456472061, 2, 'Trùm quản lý sản phẩm'),
-('items_update', 2, 'Hệ thống cập nhật', NULL, NULL, 1456374535, 1456374560, 2, 'Sửa sản phẩm'),
-('items_upload', 2, 'Hệ thống cập nhật', NULL, NULL, 1456481483, 1456481483, 2, 'Tải ảnh lên server');
+('administrator', 1, 'Hệ thống cập nhật', NULL, NULL, 1457404887, 1457404887, 1, 'Định nghĩa quyền'),
+('administrator_assigndata', 2, 'Hệ thống cập nhật', NULL, NULL, 1457404889, 1457404889, 1, 'Cấp quyền người dùng'),
+('administrator_defineauth', 2, 'Hệ thống cập nhật', NULL, NULL, 1457404888, 1457404888, 1, 'Quyền sản phẩm của bạn'),
+('administrator_getigroup', 2, 'Hệ thống cập nhật', NULL, NULL, 1457404889, 1457404889, 1, 'Lấy toàn bộ item quản trị'),
+('administrator_handle', 2, 'Hệ thống cập nhật', NULL, NULL, 1457404887, 1457404887, 1, 'Xử lý nhóm quyền'),
+('administrator_index', 2, 'Hệ thống cập nhật', NULL, NULL, 1457404888, 1457404888, 1, 'Quản lý trang định nghĩa'),
+('administrator_item', 2, 'Hệ thống cập nhật', NULL, NULL, 1457404889, 1457404889, 1, 'Các sản phẩm quản trị'),
+('function', 1, 'Hệ thống cập nhật', NULL, NULL, 1457404978, 1457404978, 1, 'Phân quyền quản trị'),
+('function_index', 2, 'Hệ thống cập nhật', NULL, NULL, 1457404978, 1457404978, 1, 'Phân quyền người dùng'),
+('home', 1, 'Hệ thống cập nhật', NULL, NULL, 1457404996, 1457404996, 1, 'Trang chủ'),
+('home_index', 2, 'Hệ thống cập nhật', NULL, NULL, 1457404997, 1457404997, 1, 'Trang chủ'),
+('image', 1, 'Hệ thống cập nhật', NULL, NULL, 1457405100, 1457405100, 4, 'Quản trị hình ảnh'),
+('image_get', 2, 'Hệ thống cập nhật', NULL, NULL, 1457405104, 1457405104, 4, 'Lấy hình ảnh '),
+('image_index', 2, 'Hệ thống cập nhật', NULL, NULL, 1457405104, 1457405104, 4, 'Trang quản trị hình ảnh'),
+('image_remove', 2, 'Hệ thống cập nhật', NULL, NULL, 1457405105, 1457405105, 4, 'Xóa hình ảnh'),
+('image_upload', 2, 'Hệ thống cập nhật', NULL, NULL, 1457405105, 1457405105, 4, 'Tải hình ảnh lên server'),
+('itemcategory', 1, 'Hệ thống cập nhật', NULL, NULL, 1457405185, 1457405185, 2, 'Danh mục sản phẩm'),
+('itemcategory_addnew', 2, 'Hệ thống cập nhật', NULL, NULL, 1457405186, 1457405186, 2, 'Thêm mới danh mục II'),
+('itemcategory_changeactive', 2, 'Hệ thống cập nhật', NULL, NULL, 1457405187, 1457405187, 2, 'Thay đổi trạng thái danh mục'),
+('itemcategory_changelink', 2, 'Hệ thống cập nhật', NULL, NULL, 1457405188, 1457405188, 2, 'Thay đổi đường dẫn'),
+('itemcategory_getcate', 2, 'Hệ thống cập nhật', NULL, NULL, 1457405188, 1457405188, 2, 'Lấy từng danh mục sản phẩm'),
+('itemcategory_index', 2, 'Hệ thống cập nhật', NULL, NULL, 1457405185, 1457405185, 2, 'Quản trị danh mục'),
+('itemcategory_new', 2, 'Hệ thống cập nhật', NULL, NULL, 1457405186, 1457405186, 2, 'Thêm mới danh mục'),
+('itemcategory_remove', 2, 'Hệ thống cập nhật', NULL, NULL, 1457405189, 1457405189, 2, 'Xóa danh mục'),
+('itemcategory_update', 2, 'Hệ thống cập nhật', NULL, NULL, 1457405186, 1457405186, 2, 'Cập nhật danh mục'),
+('items', 1, 'Hệ thống cập nhật', NULL, NULL, 1457405255, 1457405255, 2, 'Quản trị sản phẩm'),
+('items_add', 2, 'Hệ thống cập nhật', NULL, NULL, 1457405256, 1457405256, 2, 'Thêm sản phẩm'),
+('items_index', 2, 'Hệ thống cập nhật', NULL, NULL, 1457405255, 1457405255, 2, 'Trang chủ quản trị sản phẩm'),
+('items_remove', 2, 'Hệ thống cập nhật', NULL, NULL, 1457405257, 1457405257, 2, 'Xóa sản phẩm'),
+('items_update', 2, 'Hệ thống cập nhật', NULL, NULL, 1457405256, 1457405256, 2, 'Sửa sản phẩm'),
+('items_upload', 2, 'Hệ thống cập nhật', NULL, NULL, 1457405257, 1457405257, 2, 'Upload ảnh sản phẩm lên server');
 
 -- --------------------------------------------------------
 
@@ -170,12 +190,21 @@ INSERT INTO `auth_item_child` (`parent`, `child`) VALUES
 ('administrator', 'administrator_item'),
 ('function', 'function_index'),
 ('home', 'home_index'),
-('images', 'images_index'),
-('images', 'images_test'),
-('images', 'images_upload'),
+('image', 'image_get'),
+('image', 'image_index'),
+('image', 'image_remove'),
+('image', 'image_upload'),
+('itemcategory', 'itemcategory_addnew'),
+('itemcategory', 'itemcategory_changeactive'),
+('itemcategory', 'itemcategory_changelink'),
+('itemcategory', 'itemcategory_getcate'),
+('itemcategory', 'itemcategory_index'),
+('itemcategory', 'itemcategory_new'),
+('itemcategory', 'itemcategory_remove'),
+('itemcategory', 'itemcategory_update'),
 ('items', 'items_add'),
-('items', 'items_createitem'),
 ('items', 'items_index'),
+('items', 'items_remove'),
 ('items', 'items_update'),
 ('items', 'items_upload');
 
@@ -206,7 +235,18 @@ CREATE TABLE IF NOT EXISTS `categories_items` (
   `created_at` int(11) NOT NULL,
   `updated_at` int(11) NOT NULL,
   `active` tinyint(4) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `categories_items`
+--
+
+INSERT INTO `categories_items` (`id`, `category_name`, `alias`, `parent_id`, `created_at`, `updated_at`, `active`) VALUES
+(1, 'Đồ nam', 'do-nam', 0, 1457085734, 1457345907, 1),
+(2, 'Quần nam', 'quan-nam', 1, 1457087007, 1457324630, 1),
+(3, 'Đồ nữ', 'do-nu', 0, 1457323882, 1457323882, 1),
+(5, 'Giày nữ', 'giay-nu', 3, 1457343917, 1457343931, 1),
+(7, 'Giày thể thao nữ', 'giay-the-thao-nu', 5, 1457344245, 1457344245, 1);
 
 -- --------------------------------------------------------
 
@@ -223,16 +263,14 @@ CREATE TABLE IF NOT EXISTS `images` (
   `type_object` varchar(250) NOT NULL,
   `token` varchar(250) NOT NULL,
   `user_id` varchar(50) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `images`
 --
 
 INSERT INTO `images` (`id`, `images_router`, `created_at`, `updated_at`, `object_id`, `type_object`, `token`, `user_id`) VALUES
-(1, '14565467241414hinh-nen-game-nu-chien-bonh-xinh-dep.jpg', 1456546724, 1456546724, 0, 'items', 'NnZ6SVczbHE5ekZQVlN0djBrZnpCTVhDcXo0Skh3', 'quang.nh94@gmail.com'),
-(2, '145654675112715678_1686815644925120_742065308305425126_n.jpg', 1456546751, 1456546751, 0, 'items', 'dTgwVDFZUjJVVXBzZGJ3N0F1d3Y0NGd6aEM2Tmpu', 'quang.nh94@gmail.com'),
-(3, '145654676012654338_10205064798972503_7126918206354877513_n.jpg', 1456546761, 1456546761, 0, 'items', 'UjlMM1Q1SFMxQUx5RDcwanhEMVE1RFdwODRrSDBv', 'quang.nh94@gmail.com');
+(1, '1457343205giay-the-thao-nu-co-cao-cuc-xinh-1m4G3-1125b9_simg_d0daf0_800x1200_max.png', 1457343205, 1457343205, 0, 'items', 'bDlVUWFTdjdibzNlZ0U3VEs4UGpzTkxkSzcxT3Qz', 'quang.nh94@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -256,7 +294,14 @@ CREATE TABLE IF NOT EXISTS `items` (
   `sold_quantity` int(11) NOT NULL,
   `user_id` varchar(200) NOT NULL DEFAULT '0',
   `token` varchar(250) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `items`
+--
+
+INSERT INTO `items` (`id`, `item_name`, `description`, `content`, `created_at`, `updated_at`, `alias`, `active`, `category_id`, `root_price`, `sell_price`, `quantity`, `sold_quantity`, `user_id`, `token`) VALUES
+(1, 'Giày thể thao nữ cổ cao- cực xinh - G-001', 'HUHU Fashion chuyên cung cấp Túi xách , Giầy thời trang.', '<p>\r\n\r\n</p><p>- Order hàng theo yêu cầu.</p><p>- Giao hàng toàn quốc (Miễn phí giao hàng nội thành hà nội).</p><p>- Địa chỉ : số 5, ngách 43/3 nguyễn ngọc nại, thanh xuân, hn.</p><p>- Liên hệ shop: 093 457 1168 - Ms Hường.</p><p>- Fanpage: <a target="_blank" rel="nofollow" href="https://www.facebook.com/huhufashion">https://www.facebook.com/huhufashion</a>.</p><p><img alt="Giy th thao n c cao- cc xinh 1" src="https://media3.scdn.vn/img1/2015/10_23/giay-the-thao-nu-co-cao-cuc-xinh-1m4G3-1125b9_simg_d0daf0_800x1200_max.png"><br><br><br><br><br><img alt="Giy th thao n c cao- cc xinh 2" src="https://media3.scdn.vn/img1/2015/11_1/giay-the-thao-nu-co-cao-cuc-xinh-1m4G3-11c518_simg_d0daf0_800x1200_max.png"><br><br><img alt="Giy th thao n c cao- cc xinh 3" src="https://media3.scdn.vn/img1/2015/11_1/giay-the-thao-nu-co-cao-cuc-xinh-1m4G3-9383da_simg_d0daf0_800x1200_max.png"><br><br><img alt="Giy th thao n c cao- cc xinh 4" src="https://media3.scdn.vn/img1/2015/11_1/giay-the-thao-nu-co-cao-cuc-xinh-1m4G3-26788c_simg_d0daf0_800x1200_max.png"></p><br>\r\n\r\n<br><p></p>', 1457343296, 1457343891, 'giay-the-thao-nu-co-cao-cuc-xinh-g-001', 1, 3, 350000, 320000, 50, 0, 'quang.nh94@gmail.com', 'bDlVUWFTdjdibzNlZ0U3VEs4UGpzTkxkSzcxT3Qz');
 
 -- --------------------------------------------------------
 
@@ -269,8 +314,21 @@ CREATE TABLE IF NOT EXISTS `items_properties` (
   `property_name` varchar(250) NOT NULL,
   `created_at` int(11) NOT NULL,
   `updated_at` int(11) NOT NULL,
-  `active` tinyint(4) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `active` tinyint(4) NOT NULL DEFAULT '0',
+  `item_id` int(11) NOT NULL,
+  `parent_id` int(11) NOT NULL,
+  `property_value` varchar(250) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `items_properties`
+--
+
+INSERT INTO `items_properties` (`id`, `property_name`, `created_at`, `updated_at`, `active`, `item_id`, `parent_id`, `property_value`) VALUES
+(1, 'color', 1457424286, 1457424286, 1, 1, 0, ''),
+(3, 'size', 1457427511, 1457427511, 0, 1, 0, ''),
+(14, 'test', 1457431085, 1457431586, 1, 1, 0, ''),
+(15, 'test', 1457431595, 1457431595, 1, 1, 0, '');
 
 -- --------------------------------------------------------
 
@@ -369,27 +427,27 @@ ALTER TABLE `items_properties_value`
 -- AUTO_INCREMENT for table `auth_group`
 --
 ALTER TABLE `auth_group`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `categories_items`
 --
 ALTER TABLE `categories_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `images`
 --
 ALTER TABLE `images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `items_properties`
 --
 ALTER TABLE `items_properties`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT for table `items_properties_value`
 --
