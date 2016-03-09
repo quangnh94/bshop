@@ -1,21 +1,21 @@
 <div class="box">
     <div class="box-header"></div><!-- /.box-header -->
-    <div class="box-body no-padding id-xyz" item-id="<%= id %>">
+    <div class="box-body no-padding id-zyx" item-id="<%= id %>">
         <table class="table table-striped table-bordered">
-            <tbody class="property_xyz">
+            <tbody class="property_zyx">
                 <tr>
                     <th style="width: 10px"></th>
                     <th class="text-center">Tên thuộc tính</th>
                     <th class="text-center">Trạng thái</th>
                     <th class="text-center">Chức năng</th>
                 </tr>
-                <tr>
+                <tr class="vprop_data">
                     <td class="text-center vertical-middle"><i class="fa fa-paperclip"></i></td>
                     <td class="text-center vertical-middle"><input type="text" class="form-control" value="" placeholder="Tên thuộc tính" name="property_name" /></td>
                     <td class="text-center vertical-middle"><input type="checkbox" name="active"/></td>
                     <th class="text-center vertical-middle">
-                        <button class="add-button-pop" onclick="property.addprop();" style="width: 80px;" type="button"><i class="fa fa-cloud-upload"></i> Thêm</button>
-                        <button class="edit-button-pop" onclick="property.addprop();" style="width: 80px; display: none" type="button"><i class="fa fa-pencil"></i> Sửa</button>
+                        <button class="add-button-pop" onclick="property.addprop('value');" style="width: 80px;" type="button"><i class="fa fa-cloud-upload"></i> Thêm</button>
+                        <button class="edit-button-pop" onclick="property.addprop('value');" style="width: 80px; display: none" type="button"><i class="fa fa-pencil"></i> Sửa</button>
                     </th>
                 </tr>
                 <% if(typeof data != 'undefined'){ %>
@@ -31,8 +31,7 @@
                         <% } %>
                     </td>
                     <td class="text-center vertical-middle bold-text">
-                        <button style="width: 80px;" onclick="property.Pedit('<%= this.id %>')" type="button"><i class="fa fa-pencil"></i> Sửa</button>
-                        <button style="width: 80px;" onclick="property.show('<%= this.id %>', 'value')" type="button"><i class="fa fa-usb"></i> Giá trị</button>
+                        <button style="width: 80px;" onclick="property.Pedit('<%= this.id %>', 'value');" type="button"><i class="fa fa-pencil"></i> Sửa</button>
                     </td>
                 </tr>
                 <% }); %>

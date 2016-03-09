@@ -119,14 +119,15 @@ class ItemsController extends BaseController {
     public function actionAddprop() {
         $params = \Yii::$app->request->post();
         if (!empty($params)) {
-            $prop = null;
             if (isset($params['id']) && !empty($params['id'])) {
                 $prop = ItemsProperties::get($params['id']);
                 $prop->property_name = $params['property_name'];
+                $prop->active = $params['active'];
             } else {
                 $prop = new ItemsProperties($params);
                 $prop->created_at = time();
-                $prop->parent_id = 0;
+                if (!isset($params['parent_id']))
+                    $prop->parent_id = 0;
             }
             $prop->updated_at = time();
             $result = $prop->save(false);
@@ -143,12 +144,12 @@ class ItemsController extends BaseController {
     public function actionGenprop() {
         $params = \Yii::$app->request->post();
         if (!empty($params)) {
-            $prop = ItemsProperties::getAllById($params['id']);
-            if (!empty($prop)) {
-                return $this->response(new Response(true, "Lấy dữ liệu thuộc tính thành công", $prop));
+            if (!isset($params['type'])) {
+                $prop = ItemsProperties::getAllById($params['id']);
             } else {
-                return $this->response(new Response(false, "Thất bại", []));
+                $prop = ItemsProperties::getAllByParent($params['id']);
             }
+            return $this->response(new Response(true, "Lấy dữ liệu thuộc tính thành công", $prop));
         }
     }
 

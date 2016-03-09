@@ -79,4 +79,10 @@ class Items extends ActiveRecord {
         return self::findOne($id);
     }
 
+    public function attributes() {
+        return array_merge(
+                parent::attributes(), ['images']
+        );
+    }
+
 }

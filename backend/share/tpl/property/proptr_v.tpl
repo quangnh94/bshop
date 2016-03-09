@@ -10,8 +10,7 @@
         <% } %>
     </td>
     <td class="text-center vertical-middle bold-text">
-        <button onclick="property.Pedit('<%= data.id %>')" style="width: 80px;" type="button"><i class="fa fa-pencil"></i> Sửa</button>
-        <button style="width: 80px;" onclick="property.show('<%= data.id %>', 'value')" type="button"><i class="fa fa-usb"></i> Giá trị</button>
+        <button onclick="property.Pedit('<%= data.id %>', 'value')" style="width: 80px;" type="button"><i class="fa fa-pencil"></i> Sửa</button>
     </td>
 </tr>
 <% } %>

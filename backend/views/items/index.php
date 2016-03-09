@@ -1,5 +1,6 @@
 <?php
 
+use common\components\utils\TextUtils;
 use common\models\database\Images;
 use yii\grid\GridView;
 use yii\helpers\Url;
@@ -42,7 +43,7 @@ function displayAction($data) {
                                 'class' => 'yii\grid\DataColumn',
                                 'attribute' => 'item_name',
                                 'header' => 'Tên sản phẩm',
-                                'headerOptions' => ['class' => 'text-center'],
+                                'headerOptions' => ['class' => 'text-center', 'style' => 'width:314px;'],
                                 'format' => 'text',
                                 'contentOptions' => ['class' => 'vertical-middle'],
                                 'value' => function ($data) {
@@ -57,7 +58,7 @@ function displayAction($data) {
                                 'format' => 'html',
                                 'contentOptions' => ['class' => 'vertical-middle'],
                                 'value' => function ($data) {
-                            return $data->sell_price;
+                            return TextUtils::numberFormat($data->sell_price) . ' đ';
                         },
                             ],
                             [
