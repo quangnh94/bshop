@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 09, 2016 at 11:01 AM
+-- Generation Time: Mar 22, 2016 at 11:02 AM
 -- Server version: 5.6.26
 -- PHP Version: 5.6.12
 
@@ -59,31 +59,34 @@ CREATE TABLE IF NOT EXISTS `auth_assignment` (
 --
 
 INSERT INTO `auth_assignment` (`item_name`, `user_id`, `created_at`) VALUES
-('administrator_assigndata', 'quang.nh94@gmail.com', 1457405287),
-('administrator_defineauth', 'quang.nh94@gmail.com', 1457405287),
-('administrator_getigroup', 'quang.nh94@gmail.com', 1457405287),
-('administrator_handle', 'quang.nh94@gmail.com', 1457405287),
-('administrator_index', 'quang.nh94@gmail.com', 1457405287),
-('administrator_item', 'quang.nh94@gmail.com', 1457405287),
-('function_index', 'quang.nh94@gmail.com', 1457405287),
-('home_index', 'quang.nh94@gmail.com', 1457405287),
-('image_get', 'quang.nh94@gmail.com', 1457405287),
-('image_index', 'quang.nh94@gmail.com', 1457405287),
-('image_remove', 'quang.nh94@gmail.com', 1457405287),
-('image_upload', 'quang.nh94@gmail.com', 1457405287),
-('itemcategory_addnew', 'quang.nh94@gmail.com', 1457405287),
-('itemcategory_changeactive', 'quang.nh94@gmail.com', 1457405287),
-('itemcategory_changelink', 'quang.nh94@gmail.com', 1457405287),
-('itemcategory_getcate', 'quang.nh94@gmail.com', 1457405287),
-('itemcategory_index', 'quang.nh94@gmail.com', 1457405287),
-('itemcategory_new', 'quang.nh94@gmail.com', 1457405287),
-('itemcategory_remove', 'quang.nh94@gmail.com', 1457405287),
-('itemcategory_update', 'quang.nh94@gmail.com', 1457405287),
-('items_add', 'quang.nh94@gmail.com', 1457405287),
-('items_index', 'quang.nh94@gmail.com', 1457405287),
-('items_remove', 'quang.nh94@gmail.com', 1457405287),
-('items_update', 'quang.nh94@gmail.com', 1457405287),
-('items_upload', 'quang.nh94@gmail.com', 1457405287);
+('administrator_assigndata', 'quang.nh94@gmail.com', 1458525782),
+('administrator_defineauth', 'quang.nh94@gmail.com', 1458525782),
+('administrator_getigroup', 'quang.nh94@gmail.com', 1458525782),
+('administrator_handle', 'quang.nh94@gmail.com', 1458525782),
+('administrator_index', 'quang.nh94@gmail.com', 1458525782),
+('administrator_item', 'quang.nh94@gmail.com', 1458525782),
+('function_index', 'quang.nh94@gmail.com', 1458525782),
+('home_index', 'quang.nh94@gmail.com', 1458525782),
+('hotdeal_add', 'quang.nh94@gmail.com', 1458525782),
+('hotdeal_index', 'quang.nh94@gmail.com', 1458525783),
+('hotdeal_update', 'quang.nh94@gmail.com', 1458525783),
+('image_get', 'quang.nh94@gmail.com', 1458525782),
+('image_index', 'quang.nh94@gmail.com', 1458525782),
+('image_remove', 'quang.nh94@gmail.com', 1458525782),
+('image_upload', 'quang.nh94@gmail.com', 1458525782),
+('itemcategory_addnew', 'quang.nh94@gmail.com', 1458525783),
+('itemcategory_changeactive', 'quang.nh94@gmail.com', 1458525783),
+('itemcategory_changelink', 'quang.nh94@gmail.com', 1458525783),
+('itemcategory_getcate', 'quang.nh94@gmail.com', 1458525783),
+('itemcategory_index', 'quang.nh94@gmail.com', 1458525783),
+('itemcategory_new', 'quang.nh94@gmail.com', 1458525783),
+('itemcategory_remove', 'quang.nh94@gmail.com', 1458525783),
+('itemcategory_update', 'quang.nh94@gmail.com', 1458525783),
+('items_add', 'quang.nh94@gmail.com', 1458525783),
+('items_index', 'quang.nh94@gmail.com', 1458525783),
+('items_remove', 'quang.nh94@gmail.com', 1458525783),
+('items_update', 'quang.nh94@gmail.com', 1458525783),
+('items_upload', 'quang.nh94@gmail.com', 1458525783);
 
 -- --------------------------------------------------------
 
@@ -106,7 +109,7 @@ CREATE TABLE IF NOT EXISTS `auth_group` (
 --
 
 INSERT INTO `auth_group` (`id`, `group_name`, `created_at`, `updated_at`, `status`, `description`, `alias`) VALUES
-(1, 'Hệ thống', 1456200930, 1456200930, 1, 'Quản lý hệ thống quản trị', ''),
+(1, 'Hệ thống', 1456200930, 1458525730, 1, 'Quản lý hệ thống quản trị', ''),
 (2, 'Sản phẩm', 1456200966, 1457404598, 1, 'Nhóm quyền quản lý sản phẩm', ''),
 (3, 'Khách hàng', 1456201000, 1456201000, 1, 'Nhóm quyền quản lý khách hàng', ''),
 (4, 'Hình ảnh ', 1457405034, 1457405034, 1, 'Quản trị hình ảnh', '');
@@ -134,12 +137,12 @@ CREATE TABLE IF NOT EXISTS `auth_item` (
 --
 
 INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`, `group_id`, `alias`) VALUES
-('administrator', 1, 'Hệ thống cập nhật', NULL, NULL, 1457404887, 1457404887, 1, 'Định nghĩa quyền'),
+('administrator', 1, 'Hệ thống cập nhật', NULL, NULL, 1457404887, 1458525852, 1, 'Định nghĩa quyền'),
 ('administrator_assigndata', 2, 'Hệ thống cập nhật', NULL, NULL, 1457404889, 1457404889, 1, 'Cấp quyền người dùng'),
 ('administrator_defineauth', 2, 'Hệ thống cập nhật', NULL, NULL, 1457404888, 1457404888, 1, 'Quyền sản phẩm của bạn'),
 ('administrator_getigroup', 2, 'Hệ thống cập nhật', NULL, NULL, 1457404889, 1457404889, 1, 'Lấy toàn bộ item quản trị'),
-('administrator_handle', 2, 'Hệ thống cập nhật', NULL, NULL, 1457404887, 1457404887, 1, 'Xử lý nhóm quyền'),
-('administrator_index', 2, 'Hệ thống cập nhật', NULL, NULL, 1457404888, 1457404888, 1, 'Quản lý trang định nghĩa'),
+('administrator_handle', 2, 'Hệ thống cập nhật', NULL, NULL, 1457404887, 1458525706, 1, 'Xử lý nhóm quyền'),
+('administrator_index', 2, 'Hệ thống cập nhật', NULL, NULL, 1457404888, 1458525709, 1, 'Quản lý trang định nghĩa'),
 ('administrator_item', 2, 'Hệ thống cập nhật', NULL, NULL, 1457404889, 1457404889, 1, 'Các sản phẩm quản trị'),
 ('function', 1, 'Hệ thống cập nhật', NULL, NULL, 1457404978, 1457404978, 1, 'Phân quyền quản trị'),
 ('function_index', 2, 'Hệ thống cập nhật', NULL, NULL, 1457404978, 1457404978, 1, 'Phân quyền người dùng'),
@@ -267,16 +270,18 @@ CREATE TABLE IF NOT EXISTS `hotdeal` (
   `items` text NOT NULL,
   `active` tinyint(4) NOT NULL DEFAULT '0',
   `created_at` int(11) NOT NULL,
-  `updated_at` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+  `updated_at` int(11) NOT NULL,
+  `alias` varchar(250) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `hotdeal`
 --
 
-INSERT INTO `hotdeal` (`id`, `name`, `items`, `active`, `created_at`, `updated_at`) VALUES
-(1, 'Thời trang nữ', '1,5', 1, 1457498599, 1457498599),
-(2, 'Đồng hồ', '4,2,3,6', 1, 1457510354, 1457510354);
+INSERT INTO `hotdeal` (`id`, `name`, `items`, `active`, `created_at`, `updated_at`, `alias`) VALUES
+(2, 'Đồng hồ', '4,2,3,6', 1, 1458637655, 1458637655, ''),
+(5, 'Thời trang nữ', '1,5', 1, 1458638800, 1458638800, ''),
+(7, 'Thời trang nam', '1,5', 1, 1458639925, 1458639925, 'thoi-trang-nam');
 
 -- --------------------------------------------------------
 
@@ -293,7 +298,7 @@ CREATE TABLE IF NOT EXISTS `images` (
   `type_object` varchar(250) NOT NULL,
   `token` varchar(250) NOT NULL,
   `user_id` varchar(50) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `images`
@@ -308,7 +313,9 @@ INSERT INTO `images` (`id`, `images_router`, `created_at`, `updated_at`, `object
 (6, '1457499190dong-ho-julius-ju1005-nam-nau-1m4G3-e1073d.jpg', 1457499190, 1457499190, 0, 'items', 'MG9ZQkJzTkxCc1R2N0E2UEp6TGF4REp2N3VsakJt', 'quang.nh94@gmail.com'),
 (7, '1457499198dong-ho-julius-ju1005-nam-nau-1m4G3-20e98a.jpg', 1457499198, 1457499198, 0, 'items', 'MG9ZQkJzTkxCc1R2N0E2UEp6TGF4REp2N3VsakJt', 'quang.nh94@gmail.com'),
 (8, '1457517121ao-vest-nu-thoi-trang-han-quoc-l12899-1m4G3-bff1d1_simg_d0daf0_800x1200_max.jpg', 1457517121, 1457517121, 0, 'items', 'ZnMyWnI3eFk2WG9DVWo2MTcyQ0xyc3BYNXJzY0xr', 'quang.nh94@gmail.com'),
-(9, '1457517336dong-ho-nam-dw-sieu-mong-1m4G3-7a2098_simg_d0daf0_800x1200_max.jpg', 1457517336, 1457517336, 0, 'items', 'cm5Gc1hmOEFNRlNLRVpqM04yczVVYkpWZWY5YnRB', 'quang.nh94@gmail.com');
+(9, '1457517336dong-ho-nam-dw-sieu-mong-1m4G3-7a2098_simg_d0daf0_800x1200_max.jpg', 1457517336, 1457517336, 0, 'items', 'cm5Gc1hmOEFNRlNLRVpqM04yczVVYkpWZWY5YnRB', 'quang.nh94@gmail.com'),
+(13, '145818163515.jpg', 1458181635, 1458181635, 0, 'items', 'cm5Gc1hmOEFNRlNLRVpqM04yczVVYkpWZWY5YnRB', 'quang.nh94@gmail.com'),
+(14, '14581816381.jpg', 1458181638, 1458181638, 0, 'items', 'cm5Gc1hmOEFNRlNLRVpqM04yczVVYkpWZWY5YnRB', 'quang.nh94@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -395,6 +402,45 @@ CREATE TABLE IF NOT EXISTS `items_properties_value` (
   `active` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order`
+--
+
+CREATE TABLE IF NOT EXISTS `order` (
+  `order_id` int(11) NOT NULL,
+  `buyer_email` varchar(250) NOT NULL,
+  `buyer_name` varchar(250) NOT NULL,
+  `buyer_phone` varchar(11) NOT NULL,
+  `buyer_address` varchar(250) NOT NULL,
+  `receive_email` varchar(250) NOT NULL,
+  `receive_name` varchar(250) NOT NULL,
+  `receive_phone` varchar(11) NOT NULL,
+  `receive_address` varchar(250) NOT NULL,
+  `recive_district` varchar(250) NOT NULL,
+  `remove_trade` int(11) NOT NULL,
+  `payment_type` int(11) NOT NULL,
+  `created_at` int(11) NOT NULL,
+  `updated_at` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_items`
+--
+
+CREATE TABLE IF NOT EXISTS `order_items` (
+  `order_id` int(11) NOT NULL,
+  `item_id` int(11) NOT NULL,
+  `name` varchar(250) NOT NULL,
+  `root_price` double NOT NULL,
+  `sell_price` double NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `property` text NOT NULL COMMENT 'Thuộc tính sản phẩm , cái này lưu json'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 --
 -- Indexes for dumped tables
 --
@@ -475,6 +521,18 @@ ALTER TABLE `items_properties_value`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `order`
+--
+ALTER TABLE `order`
+  ADD PRIMARY KEY (`order_id`);
+
+--
+-- Indexes for table `order_items`
+--
+ALTER TABLE `order_items`
+  ADD PRIMARY KEY (`order_id`,`item_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -492,12 +550,12 @@ ALTER TABLE `categories_items`
 -- AUTO_INCREMENT for table `hotdeal`
 --
 ALTER TABLE `hotdeal`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `images`
 --
 ALTER TABLE `images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `items`
 --
@@ -513,6 +571,11 @@ ALTER TABLE `items_properties`
 --
 ALTER TABLE `items_properties_value`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `order`
+--
+ALTER TABLE `order`
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- Constraints for dumped tables
 --

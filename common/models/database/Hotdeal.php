@@ -13,6 +13,7 @@ use Yii;
  * @property integer $active
  * @property integer $created_at
  * @property integer $updated_at
+ * @property string $alias
  */
 class Hotdeal extends \yii\db\ActiveRecord {
 
@@ -29,7 +30,7 @@ class Hotdeal extends \yii\db\ActiveRecord {
     public function rules() {
         return [
             [['name', 'items', 'created_at', 'updated_at'], 'required'],
-            [['items'], 'string'],
+            [['items', 'alias'], 'string'],
             [['active', 'created_at', 'updated_at'], 'integer'],
             [['name'], 'string', 'max' => 250]
         ];
@@ -49,17 +50,29 @@ class Hotdeal extends \yii\db\ActiveRecord {
         ];
     }
 
-    public static function getAllWithItem() {
-        $hotdeal = self::find()->orderBy('created_at DESC')->all();
+    /**
+     * Lấy hotdeal có convert items bên trong hotdeal
+     * @param type $type
+     * @param array $id
+     * @return type
+     */
+    public static function getDealWithItem($type = false, $id) {
         $itemIds = [];
-        foreach ($hotdeal as $val) {
-            $itemIds = array_merge(explode(',', $val->items), $itemIds);
+        $hotdeal = null;
+        if ($type) {
+            $hotdeal = self::find()->orderBy('created_at DESC')->all();
+            foreach ($hotdeal as $val) {
+                $itemIds = array_merge(explode(',', $val->items), $itemIds);
+            }
+        } else {
+            $hotdeal = self::findOne($id);
+            $itemIds = array_merge(explode(',', $hotdeal->items), $itemIds);
         }
 
         $ids = implode(',', $itemIds);
         $items = Items::find()
                 ->select('id, item_name, created_at, updated_at, active, root_price, sell_price, quantity, token')
-                ->where('id IN (' . $ids . ')')
+                ->where('id IN (' . $ids . ')')->andWhere(['active' => 1])
                 ->all();
 
         $tokens = [];
@@ -82,9 +95,28 @@ class Hotdeal extends \yii\db\ActiveRecord {
             $item->images = $image;
         }
 
-        foreach ($hotdeal as $val) {
+        if ($type) {
+            foreach ($hotdeal as $val) {
+                $itemIds = [];
+                $itemId = explode(",", $val->items);
+                foreach ($itemId as $id) {
+                    $itemIds[] = $id;
+                }
+
+                $listItem = [];
+                foreach ($itemIds as $id) {
+                    foreach ($items as $item) {
+                        if ($id == $item->id) {
+                            $listItem[] = $item;
+                            break;
+                        }
+                    }
+                }
+                $val->items = $listItem;
+            }
+        } else {
             $itemIds = [];
-            $itemId = explode(",", $val->items);
+            $itemId = explode(",", $hotdeal->items);
             foreach ($itemId as $id) {
                 $itemIds[] = $id;
             }
@@ -98,10 +130,22 @@ class Hotdeal extends \yii\db\ActiveRecord {
                     }
                 }
             }
-            $val->items = $listItem;
+            $hotdeal->items = $listItem;
         }
 
+
         return $hotdeal;
+    }
+
+    /**
+     * Lấy hotdeal bình thường không xử lý
+     */
+    public static function getAll() {
+        return self::find()->orderBy('created_at DESC')->all();
+    }
+
+    public static function getOne($id) {
+        return self::findOne($id);
     }
 
 }

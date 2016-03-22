@@ -19,9 +19,32 @@ class AppAsset extends AssetBundle {
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
+        'css/animate.css',
+        'css/jquery-ui-slider.css',
+        'css/jquery.bxslider.css',
+        'css/jquery.fancybox.css',
+        'css/font-awesome.min.css',
+        'css/main.css',
+        'css/meanmenu.min.css',
+        'css/nivo-slider.css',
+        'css/normalize.css',
+        'css/owl.carousel.css',
+        'css/owl.theme.css',
+        'css/responsive.css',
+        'css/style.css'
     ];
     public $js = [
-        'web/js/lib/angular.min.js',
+        'js/lib/angular.min.js',
+        'js/lib/jquery.bxslider.min.js',
+        'js/lib/jquery.fancybox.js',
+        'js/lib/jquery.meanmenu.js',
+        'js/lib/jquery.nivo.slider.js',
+        'js/lib/owl.carousel.min.js',
+        'js/lib/vendor/modernizr-2.6.2.min.js',
+        'js/lib/bootstrap.min.js',
+        'js/lib/jqueryui.js',
+        'js/lib/wow.js',
+        'js/lib/main.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

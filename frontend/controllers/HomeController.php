@@ -2,8 +2,11 @@
 
 namespace frontend\controllers;
 
-use common\components\extend\RootController;
-
 class HomeController extends BaseController {
-    
+
+    public function actionIndex() {
+        
+        return $this->render('index');
+    }
+
 }
