@@ -22,7 +22,6 @@ class HotdealController extends BaseController {
         if ($model->load(Yii::$app->request->post())) {
             $model->created_at = time();
             $model->updated_at = time();
-            $model->alias = TextUtils::removeMarks($model->name);
             $resp = $model->save();
             if ($resp) {
                 \Yii::$app->getSession()->setFlash('success', "Thêm mới thành công");

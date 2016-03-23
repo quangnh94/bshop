@@ -1,4 +1,6 @@
 <section class="header-bottom-area">
+
+    use yii\helpers\Url;
     <div class="container">
         <div class="row">
             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
@@ -195,161 +197,45 @@
                 </div>
                 <!-- SIDEBAR-LEFT-ADD END -->
                 <!-- LEFT SIDEBAR-BEST-SELLER START -->
-                <div class="single-left-sidebar sidebar-best-seller">
-                    <div class="left-title-area">
-                        <h2 class="left-title">bestseller</h2>
+                <?php if (!empty($hotdeal) && isset($hotdeal['bestseller'])): ?>
+                    <div class="single-left-sidebar sidebar-best-seller">
+                        <div class="left-title-area">
+                            <h2 class="left-title">Hàng bán chạy</h2>
+                        </div>
+                        <div class="row">
+                            <div class="sidebar-best-seller-carousel">
+                                <?php if (!empty($hotdeal->items)): ?>
+                                    <?php foreach ($hotdeal->items as $item) : ?>
+                                        <div class="item">
+                                            <div class="single-product-item">
+                                                <div class="sidebar-product-image">
+                                                    <a href="single-product.html"><img src="<?= Url::base('http') . '/uploads/' . $item->images[0] ?>" alt="product-image" /></a>
+                                                </div>
+                                                <div class="product-info sede-pro-info">
+                                                    <a href="single-product.html">Blouse</a>
+                                                    <div class="customar-comments-box">
+                                                        <div class="rating-box">
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="price-box">
+                                                        <span class="price">$22.95</span>
+                                                        <span class="old-price">$27.00</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
+                            </div>	
+                            <!-- SIDEBAR-BEST-SELLER-CAROUSEL END -->	
+                        </div>
                     </div>
-                    <div class="row">
-                        <!-- SIDEBAR-BEST-SELLER-CAROUSEL START -->			
-                        <div class="sidebar-best-seller-carousel">
-                            <!-- SIDEBAR-BEST-SELLER SINGLE ITEM START -->
-                            <div class="item">
-                                <!-- SINGLE-PRODUCT-ITEM START -->
-                                <div class="single-product-item">
-                                    <div class="sidebar-product-image">
-                                        <a href="single-product.html"><img src="img/product/sidebar_product/1.jpg" alt="product-image" /></a>
-                                    </div>
-                                    <div class="product-info sede-pro-info">
-                                        <a href="single-product.html">Blouse</a>
-                                        <div class="customar-comments-box">
-                                            <div class="rating-box">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                            </div>
-                                        </div>
-                                        <div class="price-box">
-                                            <span class="price">$22.95</span>
-                                            <span class="old-price">$27.00</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- SINGLE-PRODUCT-ITEM END -->
-                                <!-- SINGLE-PRODUCT-ITEM START -->
-                                <div class="single-product-item">
-                                    <div class="sidebar-product-image">
-                                        <a href="single-product.html"><img src="img/product/sidebar_product/2.jpg" alt="product-image" /></a>
-                                    </div>
-                                    <div class="product-info sede-pro-info">
-                                        <a href="single-product.html">Faded Short Sllev...</a>
-                                        <div class="customar-comments-box">
-                                            <div class="rating-box">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star-half-empty"></i>
-                                            </div>
-                                        </div>
-                                        <div class="price-box">
-                                            <span class="price">$16.51</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- SINGLE-PRODUCT-ITEM END -->
-                                <!-- SINGLE-PRODUCT-ITEM START -->									
-                                <div class="single-product-item">
-                                    <div class="sidebar-product-image">
-                                        <a href="single-product.html"><img src="img/product/sidebar_product/3.jpg" alt="product-image" /></a>
-                                    </div>
-                                    <div class="product-info sede-pro-info">
-                                        <a href="single-product.html">Printed Dress</a>
-                                        <div class="customar-comments-box">
-                                            <div class="rating-box">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star-half-empty"></i>
-                                                <i class="fa fa-star-half-empty"></i>
-                                            </div>
-                                        </div>
-                                        <div class="price-box">
-                                            <span class="price">$23.40</span>
-                                            <span class="old-price">$26.00</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- SINGLE-PRODUCT-ITEM END -->
-                                <!-- SINGLE-PRODUCT-ITEM START -->									
-                                <div class="single-product-item">
-                                    <div class="sidebar-product-image">
-                                        <a href="single-product.html"><img src="img/product/sidebar_product/4.jpg" alt="product-image" /></a>
-                                    </div>
-                                    <div class="product-info sede-pro-info">
-                                        <a href="single-product.html">Printed Summer...</a>
-                                        <div class="customar-comments-box">
-                                            <div class="rating-box">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                            </div>
-                                        </div>
-                                        <div class="price-box">
-                                            <span class="price">$30.50</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- SINGLE-PRODUCT-ITEM END -->
-                                <!-- SINGLE-PRODUCT-ITEM START -->									
-                                <div class="single-product-item  hidden-sm">
-                                    <div class="sidebar-product-image">
-                                        <a href="single-product.html"><img src="img/product/sidebar_product/5.jpg" alt="product-image" /></a>
-                                    </div>
-                                    <div class="product-info sede-pro-info">
-                                        <a href="single-product.html">Printed Chiffon D...</a>
-                                        <div class="customar-comments-box">
-                                            <div class="rating-box">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star-half-empty"></i>
-                                                <i class="fa fa-star-half-empty"></i>
-                                            </div>
-                                        </div>
-                                        <div class="price-box">
-                                            <span class="price">$16.40</span>
-                                            <span class="old-price">$20.50</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- SINGLE-PRODUCT-ITEM END -->								
-                            </div>
-                            <!-- SIDEBAR-BEST-SELLER SINGLE ITEM END -->
-                            <!-- SIDEBAR-BEST-SELLER SINGLE ITEM START -->
-                            <div class="item">
-                                <!-- SINGLE-PRODUCT-ITEM START -->								
-                                <div class="single-product-item">
-                                    <div class="sidebar-product-image">
-                                        <a href="single-product.html"><img src="img/product/sidebar_product/6.jpg" alt="product-image" /></a>
-                                    </div>
-                                    <div class="product-info sede-pro-info">
-                                        <a href="single-product.html">Printed Summer...</a>
-                                        <div class="customar-comments-box">
-                                            <div class="rating-box">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star-half-empty"></i>
-                                                <i class="fa fa-star-half-empty"></i>
-                                            </div>
-                                        </div>
-                                        <div class="price-box">
-                                            <span class="price">$28.98</span>
-                                            <span class="old-price">$30.51</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- SINGLE-PRODUCT-ITEM END -->									
-                            </div>
-                            <!-- SIDEBAR-BEST-SELLER SINGLE ITEM END -->
-                        </div>	
-                        <!-- SIDEBAR-BEST-SELLER-CAROUSEL END -->	
-                    </div>
-                </div>
+                <?php endif; ?>
                 <!-- LEFT SIDEBAR-BEST-SELLER END -->
             </div>	
             <!-- LEFT-SIDEBAR END -->

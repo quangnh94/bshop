@@ -1,6 +1,6 @@
 <?php
 
-use yii\helpers\ArrayHelper;
+use common\models\database\Hotdeal;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 ?>
@@ -23,6 +23,7 @@ use yii\widgets\ActiveForm;
             <div class="box-body">
                 <?= $form->field($model, 'name')->textInput(['class' => 'form-control', 'placeholder' => 'Tên hotdeal']) ?>
                 <?= $form->field($model, 'items')->textInput(['class' => 'form-control', 'placeholder' => 'Số lượng sản phẩm trong hotdeal của bạn. Ví dụ : 110,115,158']) ?>
+                <?= $form->field($model, 'alias')->dropDownList([Hotdeal::FEATURE_BOX => 'Sản phẩm đặc trưng', Hotdeal::LEFT_BOX => 'Sản phẩm bán chạy', Hotdeal::NEWS_BOX => 'Sản phẩm mới', Hotdeal::SALE_BOX => 'Sản phẩm giảm giá']) ?>
                 <?= $form->field($model, 'active')->checkbox() ?>
             </div><!-- /.box-body -->
             <div class="box-footer">

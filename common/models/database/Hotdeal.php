@@ -17,6 +17,11 @@ use Yii;
  */
 class Hotdeal extends \yii\db\ActiveRecord {
 
+    const NEWS_BOX = 'news';
+    const LEFT_BOX = 'bestseller';
+    const SALE_BOX = 'sale';
+    const FEATURE_BOX = 'feature';
+
     /**
      * @inheritdoc
      */
@@ -29,7 +34,7 @@ class Hotdeal extends \yii\db\ActiveRecord {
      */
     public function rules() {
         return [
-            [['name', 'items', 'created_at', 'updated_at'], 'required'],
+            [['name', 'items', 'created_at', 'updated_at', 'alias'], 'required'],
             [['items', 'alias'], 'string'],
             [['active', 'created_at', 'updated_at'], 'integer'],
             [['name'], 'string', 'max' => 250]
@@ -47,6 +52,7 @@ class Hotdeal extends \yii\db\ActiveRecord {
             'active' => 'Trạng thái',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
+            'alias' => 'Vị trí đặt box'
         ];
     }
 
@@ -56,7 +62,7 @@ class Hotdeal extends \yii\db\ActiveRecord {
      * @param array $id
      * @return type
      */
-    public static function getDealWithItem($type = false, $id) {
+    public static function getDealWithItem($type = false, $id = null) {
         $itemIds = [];
         $hotdeal = null;
         if ($type) {
@@ -146,6 +152,19 @@ class Hotdeal extends \yii\db\ActiveRecord {
 
     public static function getOne($id) {
         return self::findOne($id);
+    }
+
+    /**
+     * Xử lý lấy các box bên ngoài trang chủ
+     * @return type
+     */
+    public static function resolveBox() {
+        $box = self::getDealWithItem(true);
+        $new_box = [];
+        foreach ($box as $val) {
+            $new_box[$val->alias] = $val;
+        }
+        return $new_box;
     }
 
 }
