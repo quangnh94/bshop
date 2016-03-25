@@ -66,7 +66,7 @@ class Hotdeal extends \yii\db\ActiveRecord {
         $itemIds = [];
         $hotdeal = null;
         if ($type) {
-            $hotdeal = self::find()->orderBy('created_at DESC')->all();
+            $hotdeal = self::find()->where(['active' => 1])->orderBy('created_at DESC')->all();
             foreach ($hotdeal as $val) {
                 $itemIds = array_merge(explode(',', $val->items), $itemIds);
             }
