@@ -44,10 +44,10 @@ class Items extends ActiveRecord {
      */
     public function rules() {
         return [
-            [['item_name', 'description', 'created_at', 'updated_at', 'alias', 'category_id', 'root_price', 'sell_price', 'quantity', 'sold_quantity'], 'required'],
+            [['item_name', 'description', 'created_at', 'updated_at', 'alias', 'category_id', 'sell_price', 'quantity', 'sold_quantity'], 'required'],
             [['content', 'user_id', 'token'], 'string'],
             [['created_at', 'updated_at', 'active', 'category_id', 'quantity', 'sold_quantity'], 'integer'],
-            [['root_price', 'sell_price'], 'number'],
+            [['root_price', 'sell_price'], 'double'],
             [['item_name', 'description'], 'string', 'max' => 350],
             [['alias'], 'string', 'max' => 500]
         ];

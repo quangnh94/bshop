@@ -39,8 +39,8 @@ class ItemsController extends BaseController {
         if ($model->load(Yii::$app->request->post())) {
             $model->alias = TextUtils::removeMarks($model->item_name);
             $model->user_id = \Yii::$app->user->getId();
-            $model->sell_price = str_replace('.', '', $model->sell_price);
-            $model->root_price = str_replace('.', '', $model->root_price);
+            $model->sell_price = intval(str_replace('.', '', $model->sell_price));
+            $model->root_price = !empty($model->root_price) ? intval(str_replace('.', '', $model->root_price)) : 0;
             $result = $model->save(false);
             if ($result) {
                 \Yii::$app->session->setFlash('success', 'Thêm mới sản phẩm thành công');

@@ -1,6 +1,6 @@
 var textutils = {};
 
-Number.prototype.toMoney = function (decimals, decimal_sep, thousands_sep) {
+Number.prototype.toMoney = function(decimals, decimal_sep, thousands_sep) {
     var n = this,
             c = isNaN(decimals) ? 2 : Math.abs(decimals), //if decimal is zero we must take it, it means user does not want to show any decimal
             d = decimal_sep || '.', //if no decimal separator is passed we use the dot as default decimal separator (we MUST use a decimal separator)
@@ -14,17 +14,17 @@ Number.prototype.toMoney = function (decimals, decimal_sep, thousands_sep) {
     return sign + (j ? i.substr(0, j) + t : '') + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : '');
 };
 
-textutils.drawAlias = function (obj) {
+textutils.drawAlias = function(obj) {
     $("input[data-alias=alias]").val(textutils.createAlias($(obj).val()));
 };
 
-textutils.createAlias = function (str) {
+textutils.createAlias = function(str) {
     if (str === null || str === '')
         return '';
     return textutils.removeDiacritical(str).replace(/\W/g, "-").toLowerCase();
 };
 
-textutils.removeDiacritical = function (str) {
+textutils.removeDiacritical = function(str) {
     str = str.replace(/(à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ)/g, "a");
     str = str.replace(/(è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ)/g, "e");
     str = str.replace(/(ì|í|ị|ỉ|ĩ)/g, "i");
@@ -42,12 +42,12 @@ textutils.removeDiacritical = function (str) {
     return str;
 };
 
-textutils.hashParam = function () {
+textutils.hashParam = function() {
     var urlParams;
     var match,
             pl = /\+/g, // Regex for replacing addition symbol with a space
             search = /([^&=]+)=?([^&]*)/g,
-            decode = function (s) {
+            decode = function(s) {
                 return decodeURIComponent(s.replace(pl, " "));
             },
             query = $(location).attr("hash").replace('#', '').split("?")[1];
@@ -60,12 +60,12 @@ textutils.hashParam = function () {
     return urlParams;
 };
 
-textutils.getsParams = function () {
+textutils.getsParams = function() {
     var urlParams;
     var match,
             pl = /\+/g, // Regex for replacing addition symbol with a space
             search = /([^&=]+)=?([^&]*)/g,
-            decode = function (s) {
+            decode = function(s) {
                 return decodeURIComponent(s.replace(pl, " "));
             },
             query = $(location).attr('search').split("?");
@@ -77,12 +77,12 @@ textutils.getsParams = function () {
     return urlParams;
 };
 
-textutils.queryParam = function () {
+textutils.queryParam = function() {
     var urlParams;
     var match,
             pl = /\+/g, // Regex for replacing addition symbol with a space
             search = /([^&=]+)=?([^&]*)/g,
-            decode = function (s) {
+            decode = function(s) {
                 return decodeURIComponent(s.replace(pl, " "));
             },
             query = window.location.search.substring(1);
@@ -92,9 +92,9 @@ textutils.queryParam = function () {
     return urlParams;
 };
 
-textutils.buildQuery = function (params) {
+textutils.buildQuery = function(params) {
     var queryString = "";
-    $.each(params, function (key, val) {
+    $.each(params, function(key, val) {
         if (typeof val != 'undefined' && val != null && val != "") {
             if (i === 1)
                 queryString += "?";
@@ -107,7 +107,7 @@ textutils.buildQuery = function (params) {
     return queryString == "" ? "?" : queryString;
 };
 
-textutils.formatTime = function (time, format) {
+textutils.formatTime = function(time, format) {
     var months = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
     time = parseFloat(time * 1000);
     var a = new Date(time);
@@ -130,7 +130,7 @@ textutils.formatTime = function (time, format) {
     return time;
 };
 
-textutils.percentFormat = function (startPrice, sellPrice) {
+textutils.percentFormat = function(startPrice, sellPrice) {
     var percent = 0;
     if (startPrice > sellPrice)
         percent = (startPrice - sellPrice) / startPrice;
@@ -140,14 +140,14 @@ textutils.percentFormat = function (startPrice, sellPrice) {
     return percent.toMoney(0, ',', '.');
 };
 
-textutils.ucfirst = function (str) {
+textutils.ucfirst = function(str) {
     str += '';
     var f = str.charAt(0)
             .toUpperCase();
     return f + str.substr(1);
 };
 
-textutils.timeConverter = function (time) {
+textutils.timeConverter = function(time) {
     var a = new Date(time);
     var months = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
     var year = a.getFullYear();
@@ -160,14 +160,14 @@ textutils.timeConverter = function (time) {
     return time;
 };
 
-textutils.getQueryVariable = function () {
+textutils.getQueryVariable = function() {
     var vars = {};
-    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m, key, value) {
         vars[key] = value;
     });
     return vars;
 };
-textutils.getUrlParameter = function (sParam)
+textutils.getUrlParameter = function(sParam)
 {
     var sPageURL = window.location.search.substring(1);
     var sURLVariables = sPageURL.split('&');
@@ -180,11 +180,11 @@ textutils.getUrlParameter = function (sParam)
         }
     }
 }
-textutils.formatPriceVND = function (num) {
+textutils.formatPriceVND = function(num) {
     return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
 };
 
-textutils.formatNumber = function (number) {
+textutils.formatNumber = function(number) {
     var number = number.toFixed(2) + '';
     var x = number.split('.');
     var x1 = x[0];
@@ -196,7 +196,7 @@ textutils.formatNumber = function (number) {
     return x1 + x2;
 };
 
-textutils.setCookie = function (name, value, days) {
+textutils.setCookie = function(name, value, days) {
     var expires;
     if (days) {
         var date = new Date();
@@ -209,7 +209,7 @@ textutils.setCookie = function (name, value, days) {
     document.cookie = name + "=" + value + expires + "; path=/";
 };
 
-textutils.getCookie = function (c_name) {
+textutils.getCookie = function(c_name) {
     if (document.cookie.length > 0) {
         c_start = document.cookie.indexOf(c_name + "=");
         if (c_start != -1) {
@@ -224,25 +224,25 @@ textutils.getCookie = function (c_name) {
     return "";
 };
 
-textutils.readCookieObj = function (name) {
+textutils.readCookieObj = function(name) {
     var result = document.cookie.match(new RegExp(name + '=([^;]+)'));
     result && (result = JSON.parse(result[1]));
     return result;
 }
 
-textutils.removeCookie = function (name) {
+textutils.removeCookie = function(name) {
     document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 };
 
-var delay = (function () {
+var delay = (function() {
     var timer = 0;
-    return function (callback, ms) {
+    return function(callback, ms) {
         clearTimeout(timer);
         timer = setTimeout(callback, ms);
     };
 })();
 
-var format = function (num) {
+var format = function(num) {
     var str = num.toString().replace("$", ""), parts = false, output = [], i = 1, formatted = null;
 
     str = str.split("").reverse();
@@ -257,7 +257,7 @@ var format = function (num) {
     }
     return formatted = output.reverse().join("");
 };
-$(document).on('keyup', '.ur_price', function () {
+$(document).on('keyup', '.ur_price', function() {
     $(this).val(format($(this).val()));
 });
 

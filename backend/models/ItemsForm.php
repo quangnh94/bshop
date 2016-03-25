@@ -24,10 +24,10 @@ class ItemsForm extends Model {
 
     public function rules() {
         return [
-            [['item_name', 'description', 'content', 'created_at', 'updated_at', 'alias', 'category_id', 'root_price', 'sell_price', 'quantity', 'sold_quantity'], 'required'],
+            [['item_name', 'description', 'content', 'created_at', 'updated_at', 'alias', 'category_id', 'sell_price', 'quantity', 'sold_quantity'], 'required'],
             [['content'], 'string'],
             [['created_at', 'updated_at', 'active', 'category_id', 'quantity', 'sold_quantity', 'user_id'], 'integer'],
-            [['root_price', 'sell_price'], 'number'],
+            [['root_price', 'sell_price'], 'double'],
             [['item_name', 'description'], 'string', 'max' => 350],
             [['alias'], 'string', 'max' => 500],
         ];
