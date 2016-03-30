@@ -31,7 +31,12 @@ class Items extends ActiveRecord {
             TimestampBehavior::className(),
         ];
     }
+    
+    public function init() {
+        parent::init();
+    }
 
+    
     /**
      * @inheritdoc
      */
@@ -83,6 +88,10 @@ class Items extends ActiveRecord {
         return array_merge(
                 parent::attributes(), ['images']
         );
+    }
+
+    public function test() {
+        echo "HELLO WORLD";
     }
 
 }

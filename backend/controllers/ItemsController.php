@@ -17,6 +17,9 @@ class ItemsController extends BaseController {
     }
 
     public function actionIndex() {
+        $data = $this->filterParams(Items::className());
+        print_r(Items::className()); die;
+
         $provider = new ActiveDataProvider([
             'query' => Items::find(),
             'pagination' => [

@@ -10,6 +10,10 @@ use yii\helpers\Url;
 
 class BaseController extends RootController {
 
+    public function init() {
+        parent::init();
+    }
+
     public function beforeAction($event) { /* Đăng nhập rồi nhưng quay lại trang đăng nhập */
         if ($event->controller->id == 'auth' && $event->id == 'login' && Yii::$app->user->getId() != null) {
             return $this->redirect(Url::base());

@@ -33,4 +33,15 @@ class RootController extends Controller {
         return parent::beforeAction($action);
     }
 
+    /**
+     * Search Reflection object class
+     */
+    public function filterParams($object) {
+        $params = \Yii::$app->request->get();
+        $r = new \ReflectionClass($object);
+        $a = new \stdClass();
+        print_r($r->newInstance($a));
+        die;
+    }
+
 }
