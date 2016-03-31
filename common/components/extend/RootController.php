@@ -43,7 +43,6 @@ class RootController extends Controller {
         if (!empty($params)) {
             $params = json_decode(base64_decode($params));
         }
-
         $searchClass = $r->newInstance($params);
         return $searchClass;
     }
