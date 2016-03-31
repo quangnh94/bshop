@@ -4,6 +4,7 @@ namespace common\components\extend;
 
 use common\components\utils\TextUtils;
 use common\models\database\AuthAssignment;
+use ReflectionClass;
 use Yii;
 use yii\web\Controller;
 
@@ -38,10 +39,13 @@ class RootController extends Controller {
      */
     public function filterParams($object) {
         $params = \Yii::$app->request->get();
-        $r = new \ReflectionClass($object);
-        $a = new \stdClass();
-        print_r($r->newInstance($a));
-        die;
+        $r = new ReflectionClass($object);
+        if (!empty($params)) {
+            $params = json_decode(base64_decode($params));
+        }
+
+        $searchClass = $r->newInstance($params);
+        return $searchClass;
     }
 
 }
