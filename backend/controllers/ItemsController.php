@@ -2,13 +2,14 @@
 
 namespace backend\controllers;
 
+use backend\models\ItemSearch;
 use common\components\output\Response;
 use common\components\utils\TextUtils;
 use common\models\database\Images;
 use common\models\database\Items;
 use common\models\database\ItemsProperties;
 use Yii;
-use yii\data\ActiveDataProvider;
+use yii\helpers\Url;
 
 class ItemsController extends BaseController {
 
@@ -17,19 +18,15 @@ class ItemsController extends BaseController {
     }
 
     public function actionIndex() {
-        $provider = new ActiveDataProvider([
-            'query' => Items::find(),
-            'pagination' => [
-                'pageSize' => 100,
-            ],
-            'sort' => [
-                'defaultOrder' => [
-                    'created_at' => SORT_DESC
-                ]
-            ],
-        ]);
+        $search = $this->filterParams(ItemSearch::className());
+        $this->var['init'] = "search.init('#search-item');";
+        $this->staticClient = 'items.init();';
+        $this->var['breadcumb'] = [
+            Url::to(["items/index"]) => "Quản lý sản phẩm"
+        ];
+        $this->var['table_name'] = 'Quản lý sản phẩm';
         return $this->render('index', [
-                    'provider' => $provider,
+                    'provider' => $search->filter(),
         ]);
     }
 

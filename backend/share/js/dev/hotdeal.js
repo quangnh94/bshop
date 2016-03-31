@@ -53,5 +53,42 @@ hotdeal.remove = function (id) {
 };
 
 hotdeal.removeItem = function () {
+    //Tạm chưa viết
+};
 
+hotdeal.searchBox = function () {
+    popup.open('hotdeal-search', 'Tìm kiếm sản phẩm', tmpl('/hotdeal/box-search.tpl'), [
+        {
+            title: '<span><i class="fa fa-pencil"></i> Chọn sản phẩm<span>',
+            style: 'btn btn-success',
+            fn: function () {
+                popup.close('hotdeal-search');
+            }
+        },
+        {
+            title: '<span><i class="fa fa-random"></i> Hủy bỏ<span>',
+            style: 'btn btn-danger',
+            fn: function () {
+                popup.close('hotdeal-search');
+            }
+        }
+    ]);
+};
+
+hotdeal.drawlSearch = function () {
+    var data = {
+        item_ids: $('#search-box-hotdeal input[name=item_ids]').val(),
+        item_name: $('#search-box-hotdeal input[name=item_name]').val()
+    };
+
+    $.ajax({
+        url: baseUrl + 'hotdeal/searchbox',
+        type: "POST",
+        data: data,
+        success: function (result) {
+            if (result.success) {
+
+            }
+        }
+    });
 };

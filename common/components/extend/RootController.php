@@ -38,7 +38,7 @@ class RootController extends Controller {
      * Search Reflection object class
      */
     public function filterParams($object) {
-        $params = \Yii::$app->request->get();
+        $params = \Yii::$app->request->get('params');
         $r = new ReflectionClass($object);
         if (!empty($params)) {
             $params = json_decode(base64_decode($params));

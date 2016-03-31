@@ -283,6 +283,9 @@ AppAsset::register($this);
             var baseUrl = '<?= $this->context->baseUrl ?>';
             var assignments = <?= Json::encode($this->context->var['assignments']) ?>;
             var pathOther = '<?= Yii::$app->params['frontend'] ?>';
+<?php if (isset($this->context->var['init']) && !empty($this->context->var['init'])) { ?>
+    <?= $this->context->var['init']; ?>
+<?php } ?>
 <?= $this->context->staticClient ?>
         </script>
     </body>

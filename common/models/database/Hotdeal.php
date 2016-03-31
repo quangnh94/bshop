@@ -167,4 +167,9 @@ class Hotdeal extends \yii\db\ActiveRecord {
         return $new_box;
     }
 
+    public static function getDealWithName($item) {
+        $query = Items::find()->andWhere(['LIKE', 'item_name', $item])->limit(10)->all();
+        $items = [];
+    }
+
 }

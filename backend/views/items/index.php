@@ -27,6 +27,34 @@ function displayAction($data) {
 
 <section class="content">
     <div class="row">
+        <div class="around-search" id="search-item">
+            <div id="search-view">
+                <ul></ul>
+            </div>
+            <div class="col-md-3 col-sm-12 padding-b-remove">
+                <div class="form-group">
+                    <label>Tên sản phẩm</label>
+                    <input type="text" placeholder="Tên sản phẩm" class="form-control" name="item_name">
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-12 padding-b-remove">
+                <div class="form-group">
+                    <label>Trạng thái</label>
+                    <select class="form-control" name="active" placeholder="Trạng thái">
+                        <option value="">Mời chọn</option>
+                        <option value="0">Tạm khóa</option>
+                        <option value="1">Hoạt động</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-12 col-sm-12 padding-b-remove">
+                <button action="submit-search" class="btn btn-primary"><i class="fa fa-search"></i> Tìm kiếm</button>
+                <button action="reset" class="btn btn-default"><i class="fa fa-refresh"></i> Làm mới</button>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-body">
@@ -43,9 +71,9 @@ function displayAction($data) {
                                 'class' => 'yii\grid\DataColumn',
                                 'attribute' => 'item_name',
                                 'header' => 'Tên sản phẩm',
-                                'headerOptions' => ['class' => 'text-center', 'style' => 'width:314px;'],
+                                'headerOptions' => ['class' => '', 'style' => 'width:314px;'],
                                 'format' => 'text',
-                                'contentOptions' => ['class' => 'vertical-middle'],
+                                'contentOptions' => ['class' => 'vertical-middle', 'style' => 'text-align: justify;'],
                                 'value' => function ($data) {
                             return $data->item_name;
                         },

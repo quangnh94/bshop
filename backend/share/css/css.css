@@ -26,3 +26,9 @@ input[type="file"] {
 .main-lvl-parent {border: 1px solid #ccc; padding: 5px; background: #ccc;}
 .hot-deal-each .box-success img {border: 1px solid #ccc;}
 .main-hotdeal {background: #ffffff}
+.around-search {background: #fff; border-top: 2px solid #ccc; padding: 10px; width: 97%; margin: auto; margin-bottom: 10px; box-shadow: 0 1px 1px rgba(0,0,0,0.1); border-radius: 3px;}
+.padding-b-remove {padding-left: 0px;}
+#search-view {width: 100%; margin-bottom: 5px;}
+#search-view ul {list-style: none; padding: 0px;}
+#search-view ul li {display: inline; border: 1px solid #ccc; margin-right: 10px; padding: 3px; border-left: 3px solid blue;}
+#search-view ul li a {color: #000; font-weight: bold;}

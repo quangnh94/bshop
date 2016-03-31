@@ -82,4 +82,16 @@ class HotdealController extends BaseController {
         }
     }
 
+    public function actionSearchbox() {
+        $params = \Yii::$app->request->post();
+        if (!empty($params)) {
+            if (!empty($params['item_ids'])) {
+                $items = Hotdeal::getDealWithItem(true, $params['item_ids']);
+            }
+            if (!empty($params['item_name']) && $params['item_name'] != '') {
+                $items_name = Hotdeal::getDealWithName($params['item_name']);
+            }
+        }
+    }
+
 }
