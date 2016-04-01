@@ -3,8 +3,8 @@
 namespace backend\controllers;
 
 use common\components\output\Response;
-use common\components\utils\TextUtils;
 use common\models\database\Hotdeal;
+use common\models\database\Items;
 use Yii;
 
 class HotdealController extends BaseController {
@@ -84,12 +84,25 @@ class HotdealController extends BaseController {
 
     public function actionSearchbox() {
         $params = \Yii::$app->request->post();
+        $items = null;
+        $items_name = null;
         if (!empty($params)) {
             if (!empty($params['item_ids'])) {
-                $items = Hotdeal::getDealWithItem(true, $params['item_ids']);
+                $items = Items::getItems($params['item_ids']);
             }
             if (!empty($params['item_name']) && $params['item_name'] != '') {
                 $items_name = Hotdeal::getDealWithName($params['item_name']);
+            }
+
+            if (!empty($params['item_ids']) && !empty($params['item_name'])) {
+                $data_result = array_merge($items, $items_name);
+                return $this->response(new Response(true, "Lấy dữ liệu thành công", $data_result));
+            } else if (!empty($params['item_name'])) {
+                return $this->response(new Response(true, "Lấy dữ liệu thành công", $items_name));
+            } else if (!empty($params['item_ids'])) {
+                return $this->response(new Response(true, "Lấy dữ liệu thành công", $items));
+            } else {
+                return $this->response(new Response(false, "Không tìm thấy dữ liệu tương ứng", []));
             }
         }
     }

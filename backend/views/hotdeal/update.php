@@ -22,7 +22,17 @@ use yii\widgets\ActiveForm;
             </div>
             <div class="box-body">
                 <?= $form->field($model, 'name')->textInput(['class' => 'form-control', 'placeholder' => 'Tên hotdeal']) ?>
-                <?= $form->field($model, 'items')->textInput(['class' => 'form-control', 'placeholder' => 'Số lượng sản phẩm trong hotdeal của bạn. Ví dụ : 110,115,158']) ?>
+                <div>
+                    <div class="float-left" style="width: 80%;">
+                        <?= $form->field($model, 'items')->textInput(['class' => 'form-control', 'placeholder' => 'Số lượng sản phẩm trong hotdeal của bạn. Ví dụ : 110,115,158']) ?>
+                    </div>
+                    <div class="float-right" style="margin-top: 25px;">
+                        <label onclick="hotdeal.searchBox()" class="custom-file-upload">
+                            <i class="fa fa-search-plus"></i> Tìm sản phẩm
+                        </label>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
                 <?= $form->field($model, 'alias')->dropDownList([Hotdeal::FEATURE_BOX => 'Sản phẩm đặc trưng', Hotdeal::LEFT_BOX => 'Sản phẩm bán chạy', Hotdeal::NEWS_BOX => 'Sản phẩm mới', Hotdeal::SALE_BOX => 'Sản phẩm giảm giá']) ?>
                 <?= $form->field($model, 'active')->checkbox() ?>
             </div><!-- /.box-body -->

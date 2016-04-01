@@ -31,12 +31,11 @@ class Items extends ActiveRecord {
             TimestampBehavior::className(),
         ];
     }
-    
+
     public function init() {
         parent::init();
     }
 
-    
     /**
      * @inheritdoc
      */
@@ -90,8 +89,33 @@ class Items extends ActiveRecord {
         );
     }
 
-    public function test() {
-        echo "HELLO WORLD";
+    public static function getItems($ids) {
+        $items = Items::find()
+                ->select('id, item_name, created_at, updated_at, active, root_price, sell_price, quantity, token')
+                ->where('id IN (' . $ids . ')')
+                ->all();
+
+        $tokens = [];
+        foreach ($items as $item) {
+            $tokens[] = "'" . $item->token . "'";
+        }
+
+        $impToken = implode(',', $tokens);
+        $images = Images::find()
+                ->select('images_router, token')
+                ->where('token IN (' . $impToken . ')')
+                ->all();
+
+        foreach ($items as $item) {
+            $image = [];
+            foreach ($images as $i) {
+                if ($item->token == $i->token) {
+                    $image[] = $i->images_router;
+                }
+            }
+            $item->images = $image;
+        }
+        return $items;
     }
 
 }

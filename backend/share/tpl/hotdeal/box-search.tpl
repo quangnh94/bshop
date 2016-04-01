@@ -20,4 +20,7 @@
             <div class="clearfix"></div>
         </div>
     </div>
+    <div class="table-box-place">
+
+    </div>
 </div>

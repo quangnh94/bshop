@@ -168,8 +168,33 @@ class Hotdeal extends \yii\db\ActiveRecord {
     }
 
     public static function getDealWithName($item) {
-        $query = Items::find()->andWhere(['LIKE', 'item_name', $item])->limit(10)->all();
+        $query = Items::find()->andWhere(['LIKE', 'item_name', $item])->limit(20)->all();
         $items = [];
+        $token = [];
+        if (!empty($query)) {
+            foreach ($query as $key => $val) {
+                $token[] = "'" . $val->token . "'";
+            }
+
+            $impToken = implode(',', $token);
+            $images = Images::find()
+                    ->select('images_router, token')
+                    ->where('token IN (' . $impToken . ')')
+                    ->all();
+
+            foreach ($query as $item) {
+                $img = [];
+                foreach ($images as $image) {
+                    if ($item->token == $image->token) {
+                        $img[] = $image->images_router;
+                    }
+                }
+                $item['images'] = $img;
+            }
+            return $query;
+        } else {
+            return [];
+        }
     }
 
 }

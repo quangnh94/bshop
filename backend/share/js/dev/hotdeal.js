@@ -62,6 +62,26 @@ hotdeal.searchBox = function () {
             title: '<span><i class="fa fa-pencil"></i> Chọn sản phẩm<span>',
             style: 'btn btn-success',
             fn: function () {
+                var data = $('#search-box-hotdeal input[name=checkdata]');
+                var check = 0;
+                var list_id = [];
+                $.each(data, function () {
+                    if ($(this).is(":checked")) {
+                        check++;
+                        var id = $(this).parents('tr').attr('auth-hotdeal-id');
+                        list_id.push(id);
+                    }
+                });
+
+                if (check <= 0) {
+                    alert("Vui lòng chọn sản phẩm");
+                    return false;
+                }
+
+                var ids = list_id.join();
+                $('#hotdeal-items').val(function (i, val) {
+                    return val + (!val ? '' : ', ') + ids;
+                });
                 popup.close('hotdeal-search');
             }
         },
@@ -85,9 +105,18 @@ hotdeal.drawlSearch = function () {
         url: baseUrl + 'hotdeal/searchbox',
         type: "POST",
         data: data,
+        beforeSend: function (xhr) {
+
+        },
+        complete: function (jqXHR, textStatus) {
+
+        },
         success: function (result) {
             if (result.success) {
-
+                var html = tmpl('/hotdeal/table-box.tpl', result);
+                $('#search-box-hotdeal .table-box-place').html(html);
+            } else {
+                alert("Không tìm thấy dữ liệu tương ứng");
             }
         }
     });
