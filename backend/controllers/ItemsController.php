@@ -5,6 +5,7 @@ namespace backend\controllers;
 use backend\models\ItemSearch;
 use common\components\output\Response;
 use common\components\utils\TextUtils;
+use common\models\database\CategoriesItems;
 use common\models\database\Images;
 use common\models\database\Items;
 use common\models\database\ItemsProperties;
@@ -38,6 +39,7 @@ class ItemsController extends BaseController {
             $model->user_id = \Yii::$app->user->getId();
             $model->sell_price = intval(str_replace('.', '', $model->sell_price));
             $model->root_price = !empty($model->root_price) ? intval(str_replace('.', '', $model->root_price)) : 0;
+            $model->path = CategoriesItems::createPath($model->category_id);
             $result = $model->save(false);
             if ($result) {
                 \Yii::$app->session->setFlash('success', 'Thêm mới sản phẩm thành công');
@@ -63,6 +65,7 @@ class ItemsController extends BaseController {
             $model->sell_price = str_replace('.', '', $model->sell_price);
             $model->root_price = str_replace('.', '', $model->root_price);
             $model->alias = TextUtils::removeMarks($model->item_name);
+            $model->path = CategoriesItems::createPath($model->category_id);
             $model->save(false);
         }
         $this->staticClient = 'items.init(); image.render(\'' . $model->token . '\');';

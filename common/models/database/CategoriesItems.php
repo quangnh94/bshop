@@ -76,4 +76,13 @@ class CategoriesItems extends ActiveRecord {
         }
     }
 
+    public static function createPath($category_id, $path = []) {
+        $category = self::findOne($category_id);
+        $path[] = $category->id;
+        if ($category == null || $category->parent_id == null || $category->parent_id == 0) {
+            return json_encode(array_reverse($path));
+        }
+        return self::createPath($category->parent_id, $path);
+    }
+
 }

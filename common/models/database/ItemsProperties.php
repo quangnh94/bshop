@@ -73,4 +73,9 @@ class ItemsProperties extends \yii\db\ActiveRecord {
         return self::findOne($id);
     }
 
+    public static function getProp($id) {
+        $parentProp = self::find()->andWhere(['active' => 1, 'parent_id' => 0, 'item_id' => $id])->all();
+        return $parentProp;
+    }
+
 }

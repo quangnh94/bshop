@@ -23,6 +23,7 @@ use yii\db\ActiveRecord;
  * @property integer $sold_quantity
  * @property string $user_id
  * @property string $token
+ * @property string $path
  */
 class Items extends ActiveRecord {
 
@@ -48,12 +49,14 @@ class Items extends ActiveRecord {
      */
     public function rules() {
         return [
-            [['item_name', 'description', 'created_at', 'updated_at', 'alias', 'category_id', 'sell_price', 'quantity', 'sold_quantity'], 'required'],
-            [['content', 'user_id', 'token'], 'string'],
+            [['item_name', 'description', 'content', 'created_at', 'updated_at', 'alias', 'category_id', 'root_price', 'sell_price', 'quantity', 'sold_quantity', 'token', 'path'], 'required'],
+            [['content'], 'string'],
             [['created_at', 'updated_at', 'active', 'category_id', 'quantity', 'sold_quantity'], 'integer'],
-            [['root_price', 'sell_price'], 'double'],
+            [['root_price', 'sell_price'], 'number'],
             [['item_name', 'description'], 'string', 'max' => 350],
-            [['alias'], 'string', 'max' => 500]
+            [['alias'], 'string', 'max' => 500],
+            [['user_id'], 'string', 'max' => 200],
+            [['token', 'path'], 'string', 'max' => 250]
         ];
     }
 
@@ -76,6 +79,8 @@ class Items extends ActiveRecord {
             'quantity' => 'Số lượng',
             'sold_quantity' => 'Sold Quantity',
             'user_id' => 'User ID',
+            'token' => 'Token',
+            'path' => 'Path',
         ];
     }
 
@@ -85,13 +90,13 @@ class Items extends ActiveRecord {
 
     public function attributes() {
         return array_merge(
-                parent::attributes(), ['images']
+                parent::attributes(), ['images'], ['prop']
         );
     }
 
-    public static function getItems($ids) {
+    public static function getItems($ids, $properties = false) {
         $items = Items::find()
-                ->select('id, item_name, created_at, updated_at, active, root_price, sell_price, quantity, token')
+                ->select('id, item_name, created_at, updated_at, active, root_price, sell_price, quantity, token, description')
                 ->where('id IN (' . $ids . ')')
                 ->all();
 
@@ -114,6 +119,14 @@ class Items extends ActiveRecord {
                 }
             }
             $item->images = $image;
+        }
+
+        if ($properties) {
+            $prop = ItemsProperties::getProp($ids);
+            if (isset($items[0]) && count($items) <= 1) {
+                $items[0]->prop = $prop;
+                return $items[0];
+            }
         }
         return $items;
     }

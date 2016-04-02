@@ -4352,7 +4352,7 @@ span.large-btn:hover i{
     color: #fff;
     font-size: 13px;
     line-height: 18px;
-    margin-left: 10px;
+    /*margin-left: 10px;*/
     padding: 5px 8px;
 }
 .single-product-info{

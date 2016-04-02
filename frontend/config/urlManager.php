@@ -7,6 +7,6 @@ return array(
 //    'enableStrictParsing' => true,
 //    'suffix' => '.html',
     'rules' => [
-        'GET control-panel.html' => 'home/index',
+        'GET san-pham-<title:[\d\w\-_]+>-<id:\d+>.html' => 'detail/view',
     ]
 );
