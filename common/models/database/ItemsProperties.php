@@ -78,4 +78,12 @@ class ItemsProperties extends \yii\db\ActiveRecord {
         return $parentProp;
     }
 
+    public static function getPopValue($ids) {
+        $impToken = implode(',', $ids);
+        $prop = self::find()
+                ->where('parent_id IN (' . $impToken . ')')
+                ->all();
+        return $prop;
+    }
+
 }

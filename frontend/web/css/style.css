@@ -4690,3 +4690,66 @@ a.write-review-btn{
 .category-tag{
     overflow:hidden;
 }
+.single-product-prop{position: relative}
+.prop-size ul li {
+    float: left;
+    width: auto;
+    border: 2px solid #ccc;
+    background: #F2F2F2;
+    text-align: center;
+    display: block;
+    cursor: pointer;
+    position: relative;
+    margin-right: 10px;
+    margin-bottom: 5px;
+    padding: 3px;
+}
+.prop-size ul li a > .label {
+    display: block;
+    height: 26px;
+    min-width: 26px;
+    line-height: 26px;
+    padding: 0 2px;
+    color: #000;
+}
+.prop-size ul li:hover {
+    border: 2px solid #c00;
+}
+
+.prop-color ul li:hover {
+    border: 2px solid #c00;
+}
+
+.prop-color ul li {
+    float: left;
+    width: auto;
+    border: 2px solid #ccc;
+    background: #F2F2F2;
+    text-align: center;
+    display: block;
+    cursor: pointer;
+    position: relative;
+    margin-right: 10px;
+    margin-bottom: 5px;
+    padding: 3px;
+}
+.prop-color ul li a > .label {
+    display: block;
+    height: 26px;
+    min-width: 26px;
+    line-height: 26px;
+    padding: 0 2px;
+    color: #000;
+}
+
+.single-product-prop .ic-check {
+    width: 0;
+    height: 0;
+    border-bottom: 14px solid #e5101d;
+    border-left: 14px solid transparent;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    display: none;
+}

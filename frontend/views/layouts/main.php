@@ -707,7 +707,7 @@ AppAsset::register($this);
             </div>
         </section>
         <!-- COMPANY-FACALITY END -->
-        
+
         <section class="footer-top-area">
             <div class="container">
                 <div class="footer-top-container">
@@ -881,6 +881,12 @@ AppAsset::register($this);
             </div>
         </footer>
         <?php $this->endBody() ?>
+        <script>
+            var baseUrl = '<?= $this->context->baseUrl ?>';
+<?php if (isset($this->context->var['init']) && !empty($this->context->var['init'])) { ?>
+    <?= $this->context->var['init']; ?>
+<?php } ?>
+        </script>
     </body>
 </html>
 <?php $this->endPage() ?>

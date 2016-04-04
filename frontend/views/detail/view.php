@@ -1,6 +1,9 @@
 <?php
 
 use common\components\utils\TextUtils;
+use yii\helpers\Url;
+
+$this->title = $item->item_name != '' ? $item->item_name : '';
 ?>
 <section class="main-content-section">
     <div class="container">
@@ -24,71 +27,33 @@ use common\components\utils\TextUtils;
                         <div class="single-product-view">
                             <!-- Tab panes -->
                             <div class="tab-content">
-                                <div class="tab-pane active" id="thumbnail_1">
-                                    <div class="single-product-image">
-                                        <img src="img/product/sale/1.jpg" alt="single-product-image" />
-                                        <a class="new-mark-box" href="#">new</a>
-                                        <a class="fancybox" href="img/product/sale/1.jpg" data-fancybox-group="gallery"><span class="btn large-btn">View larger <i class="fa fa-search-plus"></i></span></a>
-                                    </div>	
-                                </div>
-                                <div class="tab-pane" id="thumbnail_2">
-                                    <div class="single-product-image">
-                                        <img src="img/product/sale/3.jpg" alt="single-product-image" />
-                                        <a class="new-mark-box" href="#">new</a>
-                                        <a class="fancybox" href="img/product/sale/3.jpg" data-fancybox-group="gallery"><span class="btn large-btn">View larger <i class="fa fa-search-plus"></i></span></a>
-                                    </div>	
-                                </div>
-                                <div class="tab-pane" id="thumbnail_3">
-                                    <div class="single-product-image">
-                                        <img src="img/product/sale/9.jpg" alt="single-product-image" />
-                                        <a class="new-mark-box" href="#">new</a>
-                                        <a class="fancybox" href="img/product/sale/9.jpg" data-fancybox-group="gallery"><span class="btn large-btn">View larger <i class="fa fa-search-plus"></i></span></a>
-                                    </div>	
-                                </div>
-                                <div class="tab-pane" id="thumbnail_4">
-                                    <div class="single-product-image">
-                                        <img src="img/product/sale/13.jpg" alt="single-product-image" />
-                                        <a class="new-mark-box" href="#">new</a>
-                                        <a class="fancybox" href="img/product/sale/13.jpg" data-fancybox-group="gallery"><span class="btn large-btn">View larger <i class="fa fa-search-plus"></i></span></a>
-                                    </div>	
-                                </div>
-                                <div class="tab-pane" id="thumbnail_5">
-                                    <div class="single-product-image">
-                                        <img src="img/product/sale/7.jpg" alt="single-product-image" />
-                                        <a class="new-mark-box" href="#">new</a>
-                                        <a class="fancybox" href="img/product/sale/7.jpg" data-fancybox-group="gallery"><span class="btn large-btn">View larger <i class="fa fa-search-plus"></i></span></a>
-                                    </div>	
-                                </div>
-                                <div class="tab-pane" id="thumbnail_6">
-                                    <div class="single-product-image">
-                                        <img src="img/product/sale/12.jpg" alt="single-product-image" />
-                                        <a class="new-mark-box" href="#">new</a>
-                                        <a class="fancybox" href="img/product/sale/12.jpg" data-fancybox-group="gallery"><span class="btn large-btn">View larger <i class="fa fa-search-plus"></i></span></a>
-                                    </div>	
-                                </div>
+                                <?php if (!empty($item->images) && count($item->images) > 0) { ?>
+                                    <?php $i = 1; ?>
+                                    <?php foreach ($item->images as $img): ?>
+                                        <div class="tab-pane <?= $i == 1 ? 'active' : '' ?>" id="thumbnail_<?= $i ?>">
+                                            <div class="single-product-image">
+                                                <img src="<?= Url::base('http') . '/uploads/' . $img ?>" alt="single-product-image" />
+                                                <a class="new-mark-box" href="#">new</a>
+                                                <a class="fancybox" href="<?= Url::base('http') . '/uploads/' . $img ?>" data-fancybox-group="gallery"><span class="btn large-btn">View larger <i class="fa fa-search-plus"></i></span></a>
+                                            </div>	
+                                        </div>
+                                        <?php $i++; ?>
+                                    <?php endforeach; ?>
+                                <?php } ?>
                             </div>										
                         </div>
                         <div class="select-product">
                             <!-- Nav tabs -->
                             <ul class="nav nav-tabs select-product-tab bxslider">
-                                <li class="active">
-                                    <a href="#thumbnail_1" data-toggle="tab"><img src="img/product/sidebar_product/1.jpg" alt="pro-thumbnail" /></a>
-                                </li>
-                                <li>
-                                    <a href="#thumbnail_2" data-toggle="tab"><img src="img/product/sidebar_product/2.jpg" alt="pro-thumbnail" /></a>
-                                </li>
-                                <li>
-                                    <a href="#thumbnail_3" data-toggle="tab"><img src="img/product/sidebar_product/3.jpg" alt="pro-thumbnail" /></a>
-                                </li>
-                                <li>
-                                    <a href="#thumbnail_4" data-toggle="tab"><img src="img/product/sidebar_product/4.jpg" alt="pro-thumbnail" /></a>
-                                </li>
-                                <li>
-                                    <a href="#thumbnail_5" data-toggle="tab"><img src="img/product/sidebar_product/5.jpg" alt="pro-thumbnail" /></a>
-                                </li>
-                                <li>
-                                    <a href="#thumbnail_6" data-toggle="tab"><img src="img/product/sidebar_product/6.jpg" alt="pro-thumbnail" /></a>
-                                </li>
+                                <?php if (!empty($item->images) && count($item->images) > 0) { ?>
+                                    <?php $i = 1; ?>
+                                    <?php foreach ($item->images as $img): ?>
+                                        <li class="<?= $i == 1 ? 'active' : '' ?>">
+                                            <a href="#thumbnail_<?= $i ?>" data-toggle="tab"><img src="<?= Url::base('http') . '/uploads/' . $img ?>" alt="pro-thumbnail" /></a>
+                                        </li>
+                                        <?php $i++; ?>
+                                    <?php endforeach; ?>
+                                <?php } ?>
                             </ul>										
                         </div>
                     </div>
@@ -133,30 +98,38 @@ use common\components\utils\TextUtils;
                             </div>
                             <div class="single-product-info">
                                 <a href="#"><i class="fa fa-envelope"></i></a>
-                                <a href="#"><i class="fa fa-print"></i></a>
                                 <a href="#"><i class="fa fa-heart"></i></a>
                             </div>
                             <div class="single-product-quantity">
-                                <p class="small-title">Quantity</p> 
+                                <p class="small-title">Số lượng</p> 
                                 <div class="cart-quantity">
                                     <div class="cart-plus-minus-button single-qty-btn">
                                         <input class="cart-plus-minus sing-pro-qty" type="text" name="qtybutton" value="0">
                                     </div>
                                 </div>
                             </div>
-                            <div class="single-product-size">
-                                <p class="small-title">Size </p> 
-                                <select name="product-size" id="product-size">
-                                    <option value="">S</option>
-                                    <option value="">M</option>
-                                    <option value="">L</option>
-                                </select>
-                            </div>
-                            <div class="single-product-color">
-                                <p class="small-title">Color </p> 
-                                <a href="#"><span></span></a>
-                                <a class="color-blue" href="#"><span></span></a>
-                            </div>
+                            <?php if (!empty($item->prop)): ?>
+                                <?php foreach ($item->prop as $val): ?>
+                                    <?php if ($val->property_name == 'size'): ?>
+                                        <div class="single-product-size properties-show" prop-itc="<?= $val->id ?>">
+                                            <p class="small-title">Kích thước</p>
+                                            <div class="single-product-prop prop-size">
+                                                <ul></ul>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
+                                    <?php endif; ?>
+                                    <?php if ($val->property_name == 'color'): ?>
+                                        <div class="single-product-color properties-show" prop-itc="<?= $val->id ?>">
+                                            <p class="small-title">Màu sắc </p> 
+                                            <div class="single-product-prop prop-color">
+                                                <ul class="nav nav-tabs select-product-tab"></ul>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
                             <div class="single-product-add-cart">
                                 <a class="add-cart-text" title="Add to cart" href="#">Mua ngay</a>
                                 <a class="add-cart-text" title="Add to cart" href="#">Cho vào giỏ</a>
@@ -171,15 +144,15 @@ use common\components\utils\TextUtils;
                         <div class="product-more-info-tab">
                             <!-- Nav tabs -->
                             <ul class="nav nav-tabs more-info-tab">
-                                <li class="active"><a href="#moreinfo" data-toggle="tab">more info</a></li>
-                                <li><a href="#datasheet" data-toggle="tab">data sheet</a></li>
-                                <li><a href="#review" data-toggle="tab">reviews</a></li>
+                                <li class="active"><a href="#moreinfo" data-toggle="tab">Chi tiết</a></li>
+                                <li><a href="#datasheet" data-toggle="tab">Thông số kỹ thuật</a></li>
+                                <li><a href="#review" data-toggle="tab">Bình luận</a></li>
                             </ul>
                             <!-- Tab panes -->
                             <div class="tab-content">
                                 <div class="tab-pane active" id="moreinfo">
                                     <div class="tab-description">
-                                        <p>Fashion has been creating well-designed collections since 2010. The brand offers feminine designs delivering stylish separates and statement dresses which have since evolved into a full ready-to-wear collection in which every item is a vital part of a woman's wardrobe. The result? Cool, easy, chic looks with youthful elegance and unmistakable signature style. All the beautiful pieces are made in Italy and manufactured with the greatest attention. Now Fashion extends to a range of accessories including shoes, hats, belts and more!</p>
+                                        <p><?= $item->content != '' ? $item->content : '' ?></p>
                                     </div>
                                 </div>
                                 <div class="tab-pane" id="datasheet">

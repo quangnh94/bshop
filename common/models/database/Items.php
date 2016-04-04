@@ -96,7 +96,7 @@ class Items extends ActiveRecord {
 
     public static function getItems($ids, $properties = false) {
         $items = Items::find()
-                ->select('id, item_name, created_at, updated_at, active, root_price, sell_price, quantity, token, description')
+                ->select('id, item_name, created_at, updated_at, active, root_price, sell_price, quantity, token, description,content')
                 ->where('id IN (' . $ids . ')')
                 ->all();
 

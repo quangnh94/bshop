@@ -45,6 +45,7 @@ class AppAsset extends AssetBundle {
         'js/lib/jqueryui.js',
         'js/lib/wow.js',
         'js/lib/main.js',
+        'js/dev/item.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',
