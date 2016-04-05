@@ -46,5 +46,6 @@ class RootController extends Controller {
         $searchClass = $r->newInstance($params);
         return $searchClass;
     }
-
+    
+    
 }

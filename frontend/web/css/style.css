@@ -4333,6 +4333,8 @@ span.large-btn:hover i{
     font-weight: 700;
     line-height: 30px;
     margin:0;
+    float: left;
+    margin-right: 15px;
 }
 .single-product-desc{}
 .single-product-desc p{
@@ -4752,4 +4754,14 @@ a.write-review-btn{
     bottom: 0;
     z-index: 1;
     display: none;
+}
+
+.single-product-price h4 {
+    color: #ccc;
+    font-family: 'Bitter', serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 30px;
+    margin:0;
+    text-decoration: line-through;
 }

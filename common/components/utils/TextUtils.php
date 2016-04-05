@@ -502,4 +502,17 @@ class TextUtils {
         return $newCate;
     }
 
+    /**
+     * Check trạng thái sản phẩm qua việc tính thời gian tạo của sản phẩm
+     * @param type $time
+     */
+    public static function checkStatusOfProduct($time) {
+        $condition = time() - $time;
+        $kq = '';
+        if ($condition <= 432000 && $condition > 0) {
+            $kq = "Hàng mới";
+        }
+        return $kq;
+    }
+
 }

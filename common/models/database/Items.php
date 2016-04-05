@@ -94,11 +94,20 @@ class Items extends ActiveRecord {
         );
     }
 
-    public static function getItems($ids, $properties = false) {
-        $items = Items::find()
-                ->select('id, item_name, created_at, updated_at, active, root_price, sell_price, quantity, token, description,content')
-                ->where('id IN (' . $ids . ')')
-                ->all();
+    public static function getItems($ids, $properties = false, $relative = false) {
+        if (!$relative) {
+            $items = Items::find()
+                    ->select('id, item_name, created_at, updated_at, active, root_price, sell_price, quantity, token, description,content,category_id')
+                    ->where('id IN (' . $ids . ')')
+                    ->all();
+        } else {
+            $items = self::find()
+                    ->select('id, item_name, created_at, updated_at, active, root_price, sell_price, quantity, token, description')
+                    ->where(['category_id' => $ids['category_id']])
+                    ->andWhere(['<>', 'id', $ids['item_id']])
+                    ->limit(10)
+                    ->all();
+        }
 
         $tokens = [];
         foreach ($items as $item) {

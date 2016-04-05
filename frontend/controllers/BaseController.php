@@ -39,4 +39,20 @@ class BaseController extends RootController {
         return $tree;
     }
 
+    public function beforeAction($action) {
+        if (Yii::$app->request->isAjax) {
+            $this->checkAuth($action);
+        }
+        return parent::beforeAction($action);
+    }
+
+    protected function checkAuth($event) {
+        $token = Yii::$app->request->getCsrfToken();
+        $header = Yii::$app->request->headers;
+        $auth = Yii::$app->params['auth'];
+        if (!$auth || !isset($header['csrfToken']) || empty($header['csrfToken'])) {
+            
+        }
+    }
+
 }

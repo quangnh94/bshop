@@ -1,5 +1,6 @@
 <?php
 
+use common\components\helpers\HelperLink;
 use common\components\utils\TextUtils;
 use yii\helpers\Url;
 
@@ -7,18 +8,21 @@ $this->title = $item->item_name != '' ? $item->item_name : '';
 ?>
 <section class="main-content-section">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <!-- BSTORE-BREADCRUMB START -->
-                <div class="bstore-breadcrumb">
-                    <a href="index.html">HOMe<span><i class="fa fa-caret-right"></i> </span> </a>
-                    <span> <i class="fa fa-caret-right"> </i> </span>
-                    <a href="shop-gird.html"> women </a>
-                    <span> Faded Short Sleeves T-shirt </span>
+        <?php if ($this->beginCache('xxxx', ['duration' => 3600])) { ?>
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <!-- BSTORE-BREADCRUMB START -->
+                    <div class="bstore-breadcrumb">
+                        <a href="index.html">HOMe<span><i class="fa fa-caret-right"></i> </span> </a>
+                        <span> <i class="fa fa-caret-right"> </i> </span>
+                        <a href="shop-gird.html"> women </a>
+                        <span> Faded Short Sleeves T-shirt </span>
+                    </div>
+                    <!-- BSTORE-BREADCRUMB END -->
                 </div>
-                <!-- BSTORE-BREADCRUMB END -->
             </div>
-        </div>				
+            <?php $this->endCache(); ?>
+        <?php } ?>
         <div class="row">
             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
                 <!-- SINGLE-PRODUCT-DESCRIPTION START -->
@@ -32,8 +36,10 @@ $this->title = $item->item_name != '' ? $item->item_name : '';
                                     <?php foreach ($item->images as $img): ?>
                                         <div class="tab-pane <?= $i == 1 ? 'active' : '' ?>" id="thumbnail_<?= $i ?>">
                                             <div class="single-product-image">
-                                                <img src="<?= Url::base('http') . '/uploads/' . $img ?>" alt="single-product-image" />
-                                                <a class="new-mark-box" href="#">new</a>
+                                                <img width="324" height="432" src="<?= Url::base('http') . '/uploads/' . $img ?>" alt="single-product-image" />
+                                                <?php if (TextUtils::calPercent($item->root_price, $item->sell_price) > 0): ?>
+                                                    <a class="new-mark-box" href="#">Giảm giá <?= TextUtils::calPercent($item->root_price, $item->sell_price) ?>%</a>
+                                                <?php endif; ?>
                                                 <a class="fancybox" href="<?= Url::base('http') . '/uploads/' . $img ?>" data-fancybox-group="gallery"><span class="btn large-btn">View larger <i class="fa fa-search-plus"></i></span></a>
                                             </div>	
                                         </div>
@@ -65,7 +71,6 @@ $this->title = $item->item_name != '' ? $item->item_name : '';
                                     <li><a href="#" class="twi-link"><i class="fa fa-twitter"></i>Tweet</a></li>
                                     <li><a href="#" class="fb-link"><i class="fa fa-facebook"></i>Share</a></li>
                                     <li><a href="#" class="g-plus-link"><i class="fa fa-google-plus"></i>Google+</a></li>
-                                    <li><a href="#" class="pin-link"><i class="fa fa-pinterest"></i>Pinterest</a></li>
                                 </ul>
                             </div>
                             <div class="single-product-review-box">
@@ -83,18 +88,20 @@ $this->title = $item->item_name != '' ? $item->item_name : '';
                                     <a href="#">Write a review</a>
                                 </div>		
                             </div>
-                            <div class="single-product-condition">
-                                <p>Loại sản phẩm : <span>Sản phẩm mới</span></p>
-                            </div>
+                            <?php if ($type != ''): ?>
+                                <div class="single-product-condition">
+                                    <p>Loại sản phẩm : <span> <?= $type ?></span></p>
+                                </div>
+                            <?php endif; ?>
                             <div class="single-product-price">
                                 <h2><?= TextUtils::numberFormat($item->sell_price); ?> VNĐ</h2>
+                                <?php if ($item->sell_price != $item->root_price): ?>
+                                    <h4><?= TextUtils::numberFormat($item->root_price); ?> VNĐ</h4>
+                                <?php endif; ?>
+                                <div class="clearfix"></div>
                             </div>
                             <div class="single-product-desc">
                                 <p><?= $item->description ?></p>
-                                <div class="product-in-stock">
-                                    <p>Số lượng : <?= $item->quantity ?> sản phẩm</p>
-                                    <p><span>Còn hàng</span></p>
-                                </div>
                             </div>
                             <div class="single-product-info">
                                 <a href="#"><i class="fa fa-envelope"></i></a>
@@ -210,416 +217,67 @@ $this->title = $item->item_name != '' ? $item->item_name : '';
                 </div>
                 <!-- SINGLE-PRODUCT INFO TAB END -->
                 <!-- RELATED-PRODUCTS-AREA START -->
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="left-title-area">
-                            <h2 class="left-title">related products</h2>
-                        </div>	
-                    </div>
-                    <div class="related-product-area featured-products-area">
+                <?php if (!empty($relative)): ?>
+                    <div class="row">
                         <div class="col-sm-12">
-                            <div class=" row">
-                                <!-- RELATED-CAROUSEL START -->
-                                <div class="related-product">
-                                    <!-- SINGLE-PRODUCT-ITEM START -->
-                                    <div class="item">
-                                        <div class="single-product-item">
-                                            <div class="product-image">
-                                                <a href="#"><img src="img/product/sale/3.jpg" alt="product-image" /></a>
-                                            </div>
-                                            <div class="product-info">
-                                                <div class="customar-comments-box">
-                                                    <div class="rating-box">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star-half-empty"></i>
-                                                    </div>
-                                                    <div class="review-box">
-                                                        <span>1 Review(s)</span>
-                                                    </div>
-                                                </div>
-                                                <a href="#">Faded Short T-sh...</a>
-                                                <div class="price-box">
-                                                    <span class="price">$16.51</span>
-                                                </div>
-                                            </div>
-                                        </div>							
-                                    </div>
-                                    <!-- SINGLE-PRODUCT-ITEM END -->
-                                    <!-- SINGLE-PRODUCT-ITEM START -->
-                                    <div class="item">
-                                        <div class="single-product-item">
-                                            <div class="product-image">
-                                                <a href="#"><img src="img/product/sale/1.jpg" alt="product-image" /></a>
-                                            </div>
-                                            <div class="product-info">
-                                                <div class="customar-comments-box">
-                                                    <div class="rating-box">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                    </div>
-                                                    <div class="review-box">
-                                                        <span>1 Review(s)</span>
-                                                    </div>
-                                                </div>
-                                                <a href="#">Blouse</a>
-                                                <div class="price-box">
-                                                    <span class="price">$22.95</span>
-                                                    <span class="old-price">$27.00</span>
-                                                </div>
-                                            </div>
-                                        </div>							
-                                    </div>
-                                    <!-- SINGLE-PRODUCT-ITEM END -->
-                                    <!-- SINGLE-PRODUCT-ITEM START -->								
-                                    <div class="item">
-                                        <div class="single-product-item">
-                                            <div class="product-image">
-                                                <a href="#"><img src="img/product/sale/9.jpg" alt="product-image" /></a>
-                                            </div>
-                                            <div class="product-info">
-                                                <div class="customar-comments-box">
-                                                    <div class="rating-box">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star-half-empty"></i>
-                                                        <i class="fa fa-star-half-empty"></i>
-                                                    </div>
-                                                    <div class="review-box">
-                                                        <span>1 Review(s)</span>
-                                                    </div>
-                                                </div>
-                                                <a href="#">Printed Dress</a>
-                                                <div class="price-box">
-                                                    <span class="price">$23.40</span>
-                                                    <span class="old-price">$26.00</span>
-                                                </div>
-                                            </div>
-                                        </div>							
-                                    </div>
-                                    <!-- SINGLE-PRODUCT-ITEM END -->
-                                    <!-- SINGLE-PRODUCT-ITEM START -->								
-                                    <div class="item">
-                                        <div class="single-product-item">
-                                            <div class="product-image">
-                                                <a href="#"><img src="img/product/sale/5.jpg" alt="product-image" /></a>
-                                                <div class="overlay-content">
-                                                </div>
-                                            </div>
-                                            <div class="product-info">
-                                                <div class="customar-comments-box">
-                                                    <div class="rating-box">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star-half-empty"></i>
-                                                    </div>
-                                                    <div class="review-box">
-                                                        <span>1 Review(s)</span>
-                                                    </div>
-                                                </div>
-                                                <a href="#">Printed Dress</a>
-                                                <div class="price-box">
-                                                    <span class="price">$50.99</span>
-                                                </div>
-                                            </div>
-                                        </div>							
-                                    </div>		
-                                    <!-- SINGLE-PRODUCT-ITEM END -->
-                                    <!-- SINGLE-PRODUCT-ITEM START -->								
-                                    <div class="item">
-                                        <div class="single-product-item">
-                                            <div class="product-image">
-                                                <a href="#"><img src="img/product/sale/12.jpg" alt="product-image" /></a>
-                                            </div>
-                                            <div class="product-info">
-                                                <div class="customar-comments-box">
-                                                    <div class="rating-box">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star-half-empty"></i>
-                                                        <i class="fa fa-star-half-empty"></i>
-                                                    </div>
-                                                    <div class="review-box">
-                                                        <span>1 Review(s)</span>
-                                                    </div>
-                                                </div>
-                                                <a href="#">Printed Summer Dr...</a>
-                                                <div class="price-box">
-                                                    <span class="price">$28.98</span>
-                                                    <span class="old-price">$30.51</span>
-                                                </div>
-                                            </div>
-                                        </div>							
-                                    </div>		
-                                    <!-- SINGLE-PRODUCT-ITEM END -->
-                                    <!-- SINGLE-PRODUCT-ITEM START -->								
-                                    <div class="item">
-                                        <div class="single-product-item">
-                                            <div class="product-image">
-                                                <a href="#"><img src="img/product/sale/13.jpg" alt="product-image" /></a>
-                                            </div>
-                                            <div class="product-info">
-                                                <div class="customar-comments-box">
-                                                    <div class="rating-box">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                    </div>
-                                                    <div class="review-box">
-                                                        <span>1 Review(s)</span>
-                                                    </div>
-                                                </div>
-                                                <a href="#">Printed Summer</a>
-                                                <div class="price-box">
-                                                    <span class="price">$30.50</span>
-                                                </div>
-                                            </div>
-                                        </div>							
-                                    </div>	
-                                    <!-- SINGLE-PRODUCT-ITEM END -->
-                                    <!-- SINGLE-PRODUCT-ITEM START -->								
-                                    <div class="item">
-                                        <div class="single-product-item">
-                                            <div class="product-image">
-                                                <a href="#"><img src="img/product/sale/7.jpg" alt="product-image" /></a>
-                                            </div>
-                                            <div class="product-info">
-                                                <div class="customar-comments-box">
-                                                    <div class="rating-box">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star-half-empty"></i>
-                                                        <i class="fa fa-star-half-empty"></i>
-                                                    </div>
-                                                    <div class="review-box">
-                                                        <span>1 Review(s)</span>
-                                                    </div>
-                                                </div>
-                                                <a href="#">Printed Chiffon Dr...</a>
-                                                <div class="price-box">
-                                                    <span class="price">$16.40</span>
-                                                    <span class="old-price">$20.50</span>
-                                                </div>
-                                            </div>
-                                        </div>							
-                                    </div>		
-                                    <!-- SINGLE-PRODUCT-ITEM END -->
-                                    <!-- SINGLE-PRODUCT-ITEM START -->								
-                                    <div class="item">
-                                        <div class="single-product-item">
-                                            <div class="product-image">
-                                                <a href="#"><img src="img/product/sale/11.jpg" alt="product-image" /></a>
-                                            </div>
-                                            <div class="product-info">
-                                                <div class="customar-comments-box">
-                                                    <div class="rating-box">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                    </div>
-                                                    <div class="review-box">
-                                                        <span>1 Review(s)</span>
-                                                    </div>
-                                                </div>
-                                                <a href="#">Printed Dress</a>
-                                                <div class="price-box">
-                                                    <span class="price">$26.00</span>
-                                                </div>
-                                            </div>
-                                        </div>							
-                                    </div>		
-                                    <!-- SINGLE-PRODUCT-ITEM END -->
-                                    <!-- SINGLE-PRODUCT-ITEM START -->								
-                                    <div class="item">
-                                        <div class="single-product-item">
-                                            <div class="product-image">
-                                                <a href="#"><img src="img/product/sale/10.jpg" alt="product-image" /></a>
-                                            </div>
-                                            <div class="product-info">
-                                                <div class="customar-comments-box">
-                                                    <div class="rating-box">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star-half-empty"></i>
-                                                        <i class="fa fa-star-half-empty"></i>
-                                                    </div>
-                                                    <div class="review-box">
-                                                        <span>1 Review(s)</span>
-                                                    </div>
-                                                </div>
-                                                <a href="#">Printed Dress</a>
-                                                <div class="price-box">
-                                                    <span class="price">$26.00</span>
-                                                </div>
-                                            </div>
-                                        </div>							
-                                    </div>		
-                                    <!-- SINGLE-PRODUCT-ITEM END -->
-                                    <!-- SINGLE-PRODUCT-ITEM START -->								
-                                    <div class="item">
-                                        <div class="single-product-item">
-                                            <div class="product-image">
-                                                <a href="#"><img src="img/product/sale/2.jpg" alt="product-image" /></a>
-                                            </div>
-                                            <div class="product-info">
-                                                <div class="customar-comments-box">
-                                                    <div class="rating-box">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                    </div>
-                                                    <div class="review-box">
-                                                        <span>1 Review(s)</span>
-                                                    </div>
-                                                </div>
-                                                <a href="#">Blouse</a>
-                                                <div class="price-box">
-                                                    <span class="price">$27.00</span>
-                                                </div>
-                                            </div>
-                                        </div>							
-                                    </div>		
-                                    <!-- SINGLE-PRODUCT-ITEM END -->
-                                    <!-- SINGLE-PRODUCT-ITEM START -->								
-                                    <div class="item">
-                                        <div class="single-product-item">
-                                            <div class="product-image">
-                                                <a href="#"><img src="img/product/sale/4.jpg" alt="product-image" /></a>
-                                            </div>
-                                            <div class="product-info">
-                                                <div class="customar-comments-box">
-                                                    <div class="rating-box">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star-half-empty"></i>
-                                                    </div>
-                                                    <div class="review-box">
-                                                        <span>1 Review(s)</span>
-                                                    </div>
-                                                </div>
-                                                <a href="#">Faded Short Sle...</a>
-                                                <div class="price-box">
-                                                    <span class="price">$16.51</span>
-                                                </div>
-                                            </div>
-                                        </div>							
-                                    </div>		
-                                    <!-- SINGLE-PRODUCT-ITEM END -->
-                                    <!-- SINGLE-PRODUCT-ITEM START -->								
-                                    <div class="item">
-                                        <div class="single-product-item">
-                                            <div class="product-image">
-                                                <a href="#"><img src="img/product/sale/6.jpg" alt="product-image" /></a>
-                                            </div>
-                                            <div class="product-info">
-                                                <div class="customar-comments-box">
-                                                    <div class="rating-box">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                    </div>
-                                                    <div class="review-box">
-                                                        <span>1 Review(s)</span>
-                                                    </div>
-                                                </div>
-                                                <a href="#">Printed Chiffon Dr...</a>
-                                                <div class="price-box">
-                                                    <span class="price">$16.40</span>
-                                                    <span class="old-price">$20.50</span>
-                                                </div>
-                                            </div>
-                                        </div>							
-                                    </div>		
-                                    <!-- SINGLE-PRODUCT-ITEM END -->
-                                    <!-- SINGLE-PRODUCT-ITEM START -->								
-                                    <div class="item">
-                                        <div class="single-product-item">
-                                            <div class="product-image">
-                                                <a href="#"><img src="img/product/sale/8.jpg" alt="product-image" /></a>
-                                            </div>
-                                            <div class="product-info">
-                                                <div class="customar-comments-box">
-                                                    <div class="rating-box">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star-half-empty"></i>
-                                                    </div>
-                                                    <div class="review-box">
-                                                        <span>1 Review(s)</span>
-                                                    </div>
-                                                </div>
-                                                <a href="#">Printed Dress</a>
-                                                <div class="price-box">
-                                                    <span class="price">$26.00</span>
-                                                </div>
-                                            </div>
-                                        </div>							
-                                    </div>	
-                                    <!-- SINGLE-PRODUCT-ITEM END -->
-                                    <!-- SINGLE-PRODUCT-ITEM START -->								
-                                </div>
-                                <!-- RELATED-CAROUSEL END -->
+                            <div class="left-title-area">
+                                <h2 class="left-title">sản phẩm liên quan</h2>
                             </div>	
                         </div>
-                    </div>	
-                </div>
+                        <div class="related-product-area featured-products-area">
+                            <div class="col-sm-12">
+                                <div class=" row">
+                                    <div class="related-product">
+                                        <?php foreach ($relative as $item) : ?>
+                                            <div class="item">
+                                                <div class="single-product-item">
+                                                    <div class="product-image">
+                                                        <a href="<?= HelperLink::rewriteUrl($item->id, $item->item_name, Yii::$app->params['product']['action']) ?>"><img src="<?= Url::base('http') . '/uploads/' . $item->images[0] ?>" alt="product-image" /></a>
+                                                    </div>
+                                                    <div class="product-info">
+                                                        <div class="customar-comments-box">
+                                                            <div class="rating-box">
+                                                                <i class="fa fa-star"></i>
+                                                                <i class="fa fa-star"></i>
+                                                                <i class="fa fa-star"></i>
+                                                                <i class="fa fa-star"></i>
+                                                                <i class="fa fa-star-half-empty"></i>
+                                                            </div>
+                                                            <div class="review-box">
+                                                                <span>1 Review(s)</span>
+                                                            </div>
+                                                        </div>
+                                                        <a href="<?= HelperLink::rewriteUrl($item->id, $item->item_name, Yii::$app->params['product']['action']) ?>"><?= $item->item_name ?></a>
+                                                        <div class="price-box">
+                                                            <span class="price"><?= !empty($item->sell_price) ? TextUtils::numberFormat($item->sell_price) : '' ?> VNĐ</span><br/>
+                                                            <?php if (!empty($item->root_price)): ?>
+                                                                <span class="old-price"><?= TextUtils::numberFormat($item->root_price) ?> VNĐ</span>
+                                                            <?php endif; ?>
+                                                        </div>
+                                                    </div>
+                                                </div>							
+                                            </div>
+                                        <?php endforeach; ?>
+                                    </div>
+                                    <!-- RELATED-CAROUSEL END -->
+                                </div>	
+                            </div>
+                        </div>	
+                    </div>
+                <?php endif; ?>
                 <!-- RELATED-PRODUCTS-AREA END -->
             </div>
             <!-- RIGHT SIDE BAR START -->
             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                 <!-- SINGLE SIDE BAR START -->
                 <div class="single-product-right-sidebar">
-                    <h2 class="left-title">Viewed products</h2>
+                    <h2 class="left-title">Hàng bán chạy</h2>
                     <ul>
                         <li>
                             <a href="#"><img src="img/product/sidebar_product/2.jpg" alt="" /></a>
                             <div class="r-sidebar-pro-content">
                                 <h5><a href="#">Faded Short ...</a></h5>
                                 <p>Faded short sleeves t-shirt with high...</p>
-                            </div>
-                        </li>
-                        <li>
-                            <a href="#"><img src="img/product/sidebar_product/4.jpg" alt="" /></a>
-                            <div class="r-sidebar-pro-content">
-                                <h5><a href="#">Printed Chif ..</a></h5>
-                                <p>Printed chiffon knee length dress...</p>
-                            </div>
-                        </li>
-                        <li>
-                            <a href="#"><img src="img/product/sidebar_product/6.jpg" alt="" /></a>
-                            <div class="r-sidebar-pro-content">
-                                <h5><a href="#">Printed Sum ...</a></h5>
-                                <p>Long printed dress with thin...</p>
-                            </div>
-                        </li>
-                        <li>
-                            <a href="#"><img src="img/product/sidebar_product/1.jpg" alt="" /></a>
-                            <div class="r-sidebar-pro-content">
-                                <h5><a href="#">Printed Dress </a></h5>
-                                <p>100% cotton double printed dress....</p>
                             </div>
                         </li>
                     </ul>
