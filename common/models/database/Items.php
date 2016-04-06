@@ -2,6 +2,7 @@
 
 namespace common\models\database;
 
+use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 
@@ -139,5 +140,5 @@ class Items extends ActiveRecord {
         }
         return $items;
     }
-
+    
 }

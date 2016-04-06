@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 05, 2016 at 11:56 AM
+-- Generation Time: Apr 06, 2016 at 12:16 PM
 -- Server version: 5.6.26
 -- PHP Version: 5.6.12
 
@@ -499,7 +499,8 @@ CREATE TABLE IF NOT EXISTS `order_items` (
   `root_price` double NOT NULL,
   `sell_price` double NOT NULL,
   `quantity` int(11) NOT NULL,
-  `property` text NOT NULL COMMENT 'Thuộc tính sản phẩm , cái này lưu json'
+  `property` text NOT NULL COMMENT 'Thuộc tính sản phẩm , cái này lưu json',
+  `note` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --

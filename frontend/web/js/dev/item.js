@@ -11,6 +11,11 @@ item.loadProp = function (ids) {
             url: baseUrl + 'detail/getpop',
             type: "POST",
             data: ids,
+            headers: {
+                csrfToken: $("meta[name='csrf-token']").attr('content'),
+                auth: 'quang.nh94@gmail.com',
+                code: '01216392457'
+            },
             success: function (result) {
                 if (result.success) {
                     $.each(ids, function (k, v) {
@@ -30,9 +35,9 @@ item.loadProp = function (ids) {
 };
 
 item.checkProp = function (obj) {
+    $(obj).parents('.single-product-prop').find('.has-check-prop').removeClass('has-check-prop');
     $(obj).parents('.single-product-prop').find('.ic-check').parent().css('border', '2px solid #ccc');
     $(obj).parents('.single-product-prop').find('.ic-check').remove();
     $(obj).append('<span style="display:block;" class="ic-check"></span>');
     $(obj).css('border', '2px solid #c00').addClass('has-check-prop');
-
 };

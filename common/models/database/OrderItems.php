@@ -14,27 +14,26 @@ use Yii;
  * @property double $sell_price
  * @property integer $quantity
  * @property string $property
+ * @property string $note
  */
-class OrderItems extends \yii\db\ActiveRecord
-{
+class OrderItems extends \yii\db\ActiveRecord {
+
     /**
      * @inheritdoc
      */
-    public static function tableName()
-    {
+    public static function tableName() {
         return 'order_items';
     }
 
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             [['order_id', 'item_id', 'name', 'root_price', 'sell_price', 'quantity', 'property'], 'required'],
             [['order_id', 'item_id', 'quantity'], 'integer'],
             [['root_price', 'sell_price'], 'number'],
-            [['property'], 'string'],
+            [['property', 'note'], 'string'],
             [['name'], 'string', 'max' => 250]
         ];
     }
@@ -42,8 +41,7 @@ class OrderItems extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
             'order_id' => 'Order ID',
             'item_id' => 'Item ID',
@@ -54,4 +52,11 @@ class OrderItems extends \yii\db\ActiveRecord
             'property' => 'Property',
         ];
     }
+
+    public function attributes() {
+        return array_merge(
+                parent::attributes(), ['images']
+        );
+    }
+
 }

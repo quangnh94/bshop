@@ -23,21 +23,19 @@ use Yii;
  * @property integer $updated_at
  * @property integer $remove
  */
-class Order extends \yii\db\ActiveRecord
-{
+class Order extends \yii\db\ActiveRecord {
+
     /**
      * @inheritdoc
      */
-    public static function tableName()
-    {
+    public static function tableName() {
         return 'order';
     }
 
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             [['buyer_email', 'buyer_name', 'buyer_phone', 'buyer_address', 'receive_email', 'receive_name', 'receive_phone', 'receive_address', 'recive_district', 'remove_trade', 'payment_type', 'created_at', 'updated_at'], 'required'],
             [['remove_trade', 'payment_type', 'created_at', 'updated_at', 'remove'], 'integer'],
@@ -49,8 +47,7 @@ class Order extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
             'order_id' => 'Order ID',
             'buyer_email' => 'Buyer Email',
@@ -69,4 +66,41 @@ class Order extends \yii\db\ActiveRecord
             'remove' => 'Remove',
         ];
     }
+
+    public static function getCart($cart = null, $remove = false) {
+        if (!empty($cart)) {
+            \Yii::$app->session->set('cart', $cart);
+        }
+        if ($remove) {
+            \Yii::$app->session->set('cart', '');
+        }
+        $cart = Yii::$app->session->get('cart');
+        return $cart;
+    }
+
+    public static function addCart(OrderItems $items) {
+        $cart = self::getCart();
+        if (!in_array($items->item_id, $cart)) {
+            $cart[$items->item_id] = $items;
+        } else {
+            $cart[$items->item_id]->quantity += 1;
+        }
+
+        self::getCart($cart);
+    }
+
+    public static function buildItem(Items $item) {
+        $orderItem = new OrderItems();
+        $orderItem->name = $item->item_name;
+        $orderItem->root_price = $item->root_price != 0 || $item->root_price != '' ? $item->root_price : 0;
+        $orderItem->sell_price = $item->sell_price;
+        $orderItem->property = $item->prop;
+        $orderItem->item_id = $item->id;
+        $orderItem->quantity = $item->quantity;
+        if (!empty($item->images)) {
+            $orderItem->images = isset($item->images[0]) ? $item->images[0] : '';
+        }
+        return $orderItem;
+    }
+
 }

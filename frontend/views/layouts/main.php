@@ -160,7 +160,7 @@ AppAsset::register($this);
                             <div class="shopping-cart">
                                 <a class="shop-link" href="cart.html" title="View my shopping cart">
                                     <i class="fa fa-shopping-cart cart-icon"></i>
-                                    <b>My Cart</b>
+                                    <b>Giỏ hàng</b>
                                     <span class="ajax-cart-quantity">2</span>
                                 </a>
                                 <div class="shipping-cart-overly">

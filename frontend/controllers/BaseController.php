@@ -41,18 +41,22 @@ class BaseController extends RootController {
 
     public function beforeAction($action) {
         if (Yii::$app->request->isAjax) {
-            $this->checkAuth($action);
+            $response = $this->checkAuth($action);
+            if (!$response->success) {
+                return $response->success;
+            }
         }
         return parent::beforeAction($action);
     }
 
     protected function checkAuth($event) {
-        $token = Yii::$app->request->getCsrfToken();
+        $csrfToken = Yii::$app->request->getCsrfToken();
         $header = Yii::$app->request->headers;
         $auth = Yii::$app->params['auth'];
-        if (!$auth || !isset($header['csrfToken']) || empty($header['csrfToken'])) {
-            
+        if (!$auth && $header['csrfToken'] != $csrfToken || empty($header['csrfToken']) || !isset($header['csrfToken'])) {
+            return new Response(false, "Mã truy cập không chính xác. Vui lòng thực hiện lại thao tác", []);
         }
+        return new Response(true);
     }
 
 }

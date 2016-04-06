@@ -46,6 +46,7 @@ class AppAsset extends AssetBundle {
         'js/lib/wow.js',
         'js/lib/main.js',
         'js/dev/item.js',
+        'js/dev/order.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

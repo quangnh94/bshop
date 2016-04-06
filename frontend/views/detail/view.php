@@ -111,7 +111,7 @@ $this->title = $item->item_name != '' ? $item->item_name : '';
                                 <p class="small-title">Số lượng</p> 
                                 <div class="cart-quantity">
                                     <div class="cart-plus-minus-button single-qty-btn">
-                                        <input class="cart-plus-minus sing-pro-qty" type="text" name="qtybutton" value="0">
+                                        <input class="cart-plus-minus sing-pro-qty" type="text" name="qtybutton" value="1">
                                     </div>
                                 </div>
                             </div>
@@ -138,8 +138,8 @@ $this->title = $item->item_name != '' ? $item->item_name : '';
                                 <?php endforeach; ?>
                             <?php endif; ?>
                             <div class="single-product-add-cart">
-                                <a class="add-cart-text" title="Add to cart" href="#">Mua ngay</a>
-                                <a class="add-cart-text" title="Add to cart" href="#">Cho vào giỏ</a>
+                                <a class="add-cart-text" title="Buy now" href="#">Mua ngay</a>
+                                <a class="add-cart-text" title="Add to cart" onclick="order.addCart('<?= $item->id ?>')">Cho vào giỏ</a>
                             </div>
                         </div>
                     </div>
