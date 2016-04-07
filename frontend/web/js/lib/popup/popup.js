@@ -14,7 +14,7 @@
                     <div class="modal-content">\
                         <div class="modal-header">\
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>\
-                            ' + (title === null || title === '' ? '' : '<h2 style="font-weight:bold" class="modal-title">' + title + '</h2>') + '\
+                            ' + (title === null || title === '' ? '' : '<h2 style="font-weight:bolds" class="modal-title">' + title + '</h2>') + '\
                         </div>\
                         <div class="modal-body">' + content + '</div>\
                         <div class="modal-footer"></div>\
