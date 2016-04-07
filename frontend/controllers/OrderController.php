@@ -21,8 +21,15 @@ class OrderController extends BaseController {
             $item->quantity = $params['quantity'];
             $orderItem = Order::buildItem($item);
             $cart = Order::addCart($orderItem);
-            return $this->response(new Response($success, $message, $data));
+            if (empty($cart)) {
+                return $this->response(new Response(false, "Hiện tại giỏ hàng không có sản phẩm", []));
+            }
+            return $this->response(new Response(true, "Cho sản phẩm vào giỏ hàng thành công", $cart));
         }
+    }
+
+    public function actionViewcart() {
+        return $this->response(new Response(true, "Lấy sản phẩm thành công", \Yii::$app->session->get('cart')));
     }
 
 }

@@ -80,13 +80,19 @@ class Order extends \yii\db\ActiveRecord {
 
     public static function addCart(OrderItems $items) {
         $cart = self::getCart();
-        if (!in_array($items->item_id, $cart)) {
+        if (!empty($cart)) {
+            if (array_key_exists($items->item_id, $cart)) {
+                if ($items->quantity > 0) {
+                    $items->quantity += $cart[$items->item_id]->quantity;
+                } else {
+                    $cart[$items->item_id]->quantity += 1;
+                }
+            }
             $cart[$items->item_id] = $items;
         } else {
-            $cart[$items->item_id]->quantity += 1;
+            $cart[$items->item_id] = $items;
         }
-
-        self::getCart($cart);
+        return self::getCart($cart);
     }
 
     public static function buildItem(Items $item) {
@@ -96,7 +102,7 @@ class Order extends \yii\db\ActiveRecord {
         $orderItem->sell_price = $item->sell_price;
         $orderItem->property = $item->prop;
         $orderItem->item_id = $item->id;
-        $orderItem->quantity = $item->quantity;
+        $orderItem->quantity = $item->quantity != 0 ? $item->quantity : 0;
         if (!empty($item->images)) {
             $orderItem->images = isset($item->images[0]) ? $item->images[0] : '';
         }

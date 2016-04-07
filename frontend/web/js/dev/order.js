@@ -31,9 +31,26 @@ order.addCart = function (id) {
         },
         success: function (result) {
             if (result.success) {
-
+                var length = Object.keys(result.data).length;
+                $('.ajax-cart-quantity').text(length);
             }
         }
     });
 };
 
+order.viewCart = function () {
+    $.ajax({
+        url: baseUrl + 'order/viewcart',
+        type: "POST",
+        headers: {
+            csrfToken: $("meta[name='csrf-token']").attr('content'),
+            auth: 'quang.nh94@gmail.com',
+            code: '01216392457'
+        },
+        success: function (result) {
+            if (result.success) {
+                popup.open('popup-viewcart', 'ĐƠN HÀNG CỦA BẠN', tmpl('/order/checkout.tpl', result), [], 'modal-lg');
+            }
+        }
+    });
+};
