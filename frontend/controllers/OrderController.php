@@ -29,7 +29,11 @@ class OrderController extends BaseController {
     }
 
     public function actionViewcart() {
-        return $this->response(new Response(true, "Lấy sản phẩm thành công", \Yii::$app->session->get('cart')));
+        if (!empty(\Yii::$app->session->get('cart'))) {
+            return $this->response(new Response(true, "Lấy sản phẩm thành công", \Yii::$app->session->get('cart')));
+        } else {
+            return $this->response(new Response(true, "Giỏ hàng trống", []));
+        }
     }
 
 }

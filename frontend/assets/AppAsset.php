@@ -46,10 +46,12 @@ class AppAsset extends AssetBundle {
         'js/lib/popup/ejs.js',
         'js/lib/popup/tmpl.js',
         'js/lib/popup/popup.js',
+        'js/lib/textutils.js',
         'js/lib/wow.js',
         'js/lib/main.js',
         'js/dev/item.js',
         'js/dev/order.js',
+        'js/dev/component.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

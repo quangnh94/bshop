@@ -31,6 +31,7 @@ order.addCart = function (id) {
         },
         success: function (result) {
             if (result.success) {
+                popup.msg('Chọn sản phẩm thành công. Vui lòng kiểm tra giỏ hàng của bạn.');
                 var length = Object.keys(result.data).length;
                 $('.ajax-cart-quantity').text(length);
             }
@@ -49,8 +50,41 @@ order.viewCart = function () {
         },
         success: function (result) {
             if (result.success) {
-                popup.open('popup-viewcart', 'ĐƠN HÀNG CỦA BẠN', tmpl('/order/checkout.tpl', result), [], 'modal-lg');
+                var length = Object.keys(result.data).length;
+                result.sizeData = length;
+                popup.open('popup-viewcart', 'GIỎ HÀNG CỦA BẠN', tmpl('/order/checkout.tpl', result), [], 'modal-lg');
             }
         }
     });
+};
+
+order.calcuWithQty = function (ud, sell_price, id) {
+    var obj = $('tr[auth-current-id=' + id + '] input[name=qtybutton]');
+    var drawl = $('tr[auth-current-id=' + id + '] .text-price-total');
+    var total = parseFloat($('.total_price_cart').attr('total-hide'));
+
+    switch (ud) {
+        case 'up' :
+            var add = parseInt(obj.val()) + 1;
+            obj.val(add);
+            var odd = parseFloat(sell_price) * add;
+            total += parseFloat(sell_price);
+            drawl.text(format(odd) + ' VNĐ');
+            break;
+        case 'down' :
+            var rmv = parseInt(obj.val()) - 1;
+            if (rmv == 0) {
+                return false;
+            }
+            obj.val(rmv);
+            var odd = parseFloat(sell_price) * rmv;
+            total -= parseFloat(sell_price);
+            drawl.text(format(odd) + ' VNĐ');
+            break;
+    }
+
+    $('.total_price_cart').attr('total-hide', total);
+    $('.total_price_cart span').text(format(total));
+
+
 };

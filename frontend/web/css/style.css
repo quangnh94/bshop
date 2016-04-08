@@ -3669,10 +3669,13 @@ ul.step li.step-done span a{
 }
 #cart-summary tbody td.cart-product {
     padding: 7px;
-    width: 130px;
+    width: 75px;
 }
 #cart-summary tbody td.cart-description {
-
+    vertical-align: top;
+}
+#cart-summary tbody td.cart-description p {
+    margin: 0;
 }
 #cart-summary tbody td.cart-unit {
     width:12.2%;
@@ -4640,7 +4643,7 @@ a.write-review-btn{
 .product-info{}
 .customar-comments-box{}
 .price-box{}
-.price{}
+.price{margin: 12px 0px 0px 0px;}
 .overlay-content{}
 .single-product-right-sidebar{
     margin-bottom:20px;
@@ -4773,3 +4776,23 @@ a.write-review-btn{
 }
 .float-left {float: left}
 .float-right {float: right}
+.text-price-total {
+    font-size: 16px;
+    font-weight: bold;
+}
+.check-out-form {width: 100%; margin-top: 10px; border-top: 1px dotted #ccc;}
+.button-check-out-cart {
+    color: #fff;
+    font-size: 14px;
+    padding: 10px 70px;
+    background-color: #e5101d;
+    border: none;
+    text-transform: uppercase;
+    border-radius: 2px;
+    font-weight: bold;
+}
+.total_price_cart {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+}
